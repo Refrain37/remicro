@@ -1,6 +1,6 @@
 {
     "name": "remicro.js",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "description": "remicro",
     "author": "refrain",
     "homepage": "",
@@ -18,5 +18,6 @@
     },
     "devDependencies": {
         "typescript": "^4.5.2"
-    }
+    },
+    "gitHead": "ca09732af7a0d672217b8664302a212662f4e1c1"
 }
