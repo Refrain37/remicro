@@ -9,7 +9,8 @@
     "main": "index.js",
     "scripts": {
         "build": "lerna run build",
-        "publish": "lerna run build && lerna publish"
+        "publish": "lerna run build && lerna publish",
+        "its": "lerna add typescript -D"
     },
     "author": "refrain",
     "license": "ISC",
