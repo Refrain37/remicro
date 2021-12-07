@@ -5,13 +5,12 @@
     "author": "许泓杰 <965926581@qq.com>",
     "homepage": "https://github.com/Refrain37/remicro#readme",
     "license": "ISC",
-    "main": "lib/index.js",
-    "directories": {
-        "lib": "lib",
-        "test": "__tests__"
-    },
+    "main": "index.js",
+    "module": "dist/index.esm.js",
+    "types": "dist/index.d.ts",
     "files": [
-        "lib"
+        "dist",
+        "index.js"
     ],
     "publishConfig": {
         "access": "public"

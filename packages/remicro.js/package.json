@@ -5,13 +5,12 @@
     "author": "refrain",
     "homepage": "",
     "license": "ISC",
-    "main": "lib/index.js",
-    "directories": {
-        "lib": "lib",
-        "test": "__tests__"
-    },
+    "main": "index.js",
+    "module": "dist/index.esm.js",
+    "types": "dist/index.d.ts",
     "files": [
-        "lib"
+        "dist",
+        "index.js"
     ],
     "scripts": {
         "build": "tsc"
