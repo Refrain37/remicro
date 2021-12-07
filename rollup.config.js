@@ -8,7 +8,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 
 if (!process.env.pkgName) {
-    throw new Error('package must be specified via --environment flag.');
+    throw new Error('current package must be specified via --environment flag.');
 }
 
 const packagesDir = path.resolve(__dirname, 'packages');

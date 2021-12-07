@@ -9,7 +9,7 @@
     "main": "index.js",
     "scripts": {
         "build": "node scripts/build.js",
-        "publish": "lerna run build && lerna publish",
+        "publish": "node scripts/build.js && lerna publish",
         "its": "lerna add typescript -D",
         "link": "lerna clean -y && lerna bootstrap && lerna link"
     },
