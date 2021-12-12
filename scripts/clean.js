@@ -20,7 +20,7 @@ async function cleanAll() {
 }
 
 async function clean(package) {
-    exec('rm -rf dist', (err, stdout, stderr) => {
-        console.log(package, stdout);
-    });
+    // exec('rm -rf ./dist', (err, stdout, stderr) => {
+    //     console.log(package, stdout);
+    // });
 }
