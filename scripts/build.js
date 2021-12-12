@@ -1,16 +1,23 @@
 const path = require('path');
-const fs = require('fs');
 const execa = require('execa');
+const utils = require('./utils');
+
+const env = utils.getArg('env') || 'development';
+const package = utils.getArg('name') || '';
 
 start();
 
 async function start() {
-    await buildAll();
+    if (package) {
+        await build(package);
+    } else {
+        await buildAll();
+    }
 }
 
 async function buildAll() {
-    const packages = getPackages();
-    await runParallel(require('os').cpus().length, packages, build);
+    const packages = utils.getPackages();
+    await utils.runParallel(require('os').cpus().length, packages, build);
 }
 
 async function build(package) {
@@ -23,35 +30,9 @@ async function build(package) {
 
     // execute rollup -c
     await execa(
-        'rollup', ['-c', '--environment', [`pkgName:${package}`].filter(Boolean).join(',')], { stdio: 'inherit' }
+        'rollup', [
+            env === 'production' ? '-c' : '-wc',
+            '--environment', [`NODE_ENV:${env}`, `pkgName:${package}`].filter(Boolean).join(','),
+        ], { stdio: 'inherit' }
     );
-}
-
-async function runParallel(maxConcurrency, source, iteratorFn) {
-    const ret = [];
-    const executing = [];
-    for (const item of source) {
-        const p = Promise.resolve().then(() => iteratorFn(item, source));
-        ret.push(p);
-
-        if (maxConcurrency <= source.length) {
-            const e = p.then(() => executing.splice(executing.indexOf(e), 1));
-            executing.push(e);
-            if (executing.length >= maxConcurrency) {
-                await Promise.race(executing);
-            }
-        }
-    }
-    return Promise.all(ret);
-}
-
-function getPackages() {
-    const packages = [];
-    fs.readdirSync('packages').forEach(f => {
-        const pkg = require(`../packages/${f}/package.json`);
-        if (!pkg.private || pkg.buildOptions) {
-            packages.push(f);
-        }
-    });
-    return packages;
 }
