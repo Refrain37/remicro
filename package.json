@@ -11,7 +11,7 @@
         "dev": "node scripts/build.js env=development",
         "build": "node scripts/build.js env=production",
         "clean": "node scripts/clean.js",
-        "publish": "node scripts/build.js && lerna publish",
+        "publish": "node scripts/build.js env=production && lerna publish",
         "link": "lerna clean -y && lerna bootstrap && lerna link"
     },
     "author": "refrain",
