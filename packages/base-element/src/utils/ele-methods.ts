@@ -2,6 +2,7 @@ export interface IMethods {
   createTeamplate: (html: string, css: string) => string;
   appendChildren: (parent: HTMLElement, child: HTMLElement) => HTMLElement;
   createEle: (tagName: string, teamplate: string) => HTMLElement;
+  innerTeamplate: (obj: HTMLElement, teamplate: string) => void;
 }
 
 export function createTeamplate(html: string, css: string) {
@@ -27,8 +28,13 @@ export function createEle(tagName: string, template: string) {
   return ele;
 }
 
+export function innerTeamplate(obj: HTMLElement, teamplate: string) {
+  obj.innerHTML = teamplate;
+}
+
 export const methods: IMethods = {
   createTeamplate,
   appendChildren,
   createEle,
+  innerTeamplate,
 };

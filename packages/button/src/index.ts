@@ -6,14 +6,8 @@ const keys = ['content'];
 export default class RmButton extends BaseElement {
   constructor() {
     super();
-    const style = `
-      .rm-btn {
-        background: red;
-      }
-    `;
-    const html = `<button class="rm-btn btn">${this.content}</button>`;
-    const teamplate = this.createTeamplate(html, style);
-    this.appendChildren(this, this.createEle('div', teamplate));
+    const teamplate = `<button class="btn">${this.content}</button>`;
+    this.innerTeamplate(this, teamplate);
   }
 
   get content() {
