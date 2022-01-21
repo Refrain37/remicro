@@ -1,0 +1,9 @@
+.fontsize-loop(@n, @i: 12) when (@i <=@n) {
+  .fontsize-@{i} {
+      font-size: unit(@i, px);
+  }
+
+  .fontsize-loop(@n, (@i + 2));
+}
+
+.fontsize-loop(40);
