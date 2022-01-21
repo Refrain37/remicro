@@ -2,20 +2,29 @@ import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
 import getTeamplate from './teamplate';
 
-const props = ['content', 'type', 'href'];
+const props = ['content', 'type', 'href', 'loading'];
 
 export default class RmButton extends BaseElement {
   static props = props;
   constructor() {
     super();
     this.addEventListener('click', () => {
-      this.setAttribute('content', '321');
+      this.handleClick();
     });
   }
 
   render() {
     const teamplate = getTeamplate(this);
     this.innerTeamplate(teamplate);
+  }
+
+  /* event */
+  handleClick() {
+    console.log('test');
+    const href = this.href;
+    if (href) {
+      window.open(`https://${href}`, '_blank');
+    }
   }
 
   /* props */
@@ -27,6 +36,9 @@ export default class RmButton extends BaseElement {
   }
   get href() {
     return this.getAttribute('href');
+  }
+  get loading() {
+    return this.getAttribute('loading');
   }
 }
 

@@ -11,6 +11,16 @@
 <body>
     <rm-btn content="test" type="primary" id="btn"></rm-btn>
     <script type="module" src="../dist/index.esm.js"></script>
+    <script>
+        const btn = document.getElementById('btn')
+        btn.addEventListener('click', () => {
+            console.log('click')
+            btn.setAttribute('loading', 'true')
+            setTimeout(() => {
+                btn.setAttribute('loading', 'false')
+            }, 1000)
+        })
+    </script>
 </body>
 
 </html>
