@@ -23,6 +23,7 @@ export default class BaseElement
   extends HTMLElement
   implements ILifeCycle, IMethods, IOriginLifeCycle
 {
+  static props = [];
   constructor() {
     super();
   }
@@ -36,8 +37,14 @@ export default class BaseElement
   /* origin life-cycle */
   connectedCallback() {}
   disconnectedCallback() {}
-  attributeChangedCallback() {}
   adoptedCallback() {}
+  attributeChangedCallback() {
+    this.render();
+  }
+
+  static get observedAttributes() {
+    return this.props;
+  }
 
   /* life-cycle */
   init() {}

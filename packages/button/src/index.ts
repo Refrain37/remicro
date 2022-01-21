@@ -5,21 +5,17 @@ import getTeamplate from './teamplate';
 const props = ['content', 'type', 'href'];
 
 export default class RmButton extends BaseElement {
+  static props = props;
   constructor() {
     super();
+    this.addEventListener('click', () => {
+      this.setAttribute('content', '321');
+    });
   }
 
   render() {
-    const teamplate = getTeamplate.call(this);
+    const teamplate = getTeamplate(this);
     this.innerTeamplate(teamplate);
-  }
-
-  static get observedAttributes() {
-    return props;
-  }
-
-  attributeChangedCallback() {
-    this.render();
   }
 
   /* props */

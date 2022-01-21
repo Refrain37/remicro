@@ -5,7 +5,7 @@ export interface IMethods {
   innerTeamplate: (teamplate: string) => void;
 }
 
-export function createTeamplate(html: string, css: string) {
+function createTeamplate(html: string, css: string) {
   return `
     <style>
     ${css}
@@ -14,7 +14,7 @@ export function createTeamplate(html: string, css: string) {
   `;
 }
 
-export function appendChildren(
+function appendChildren(
   parent: HTMLElement,
   child: HTMLElement | HTMLElement[]
 ): HTMLElement {
@@ -22,13 +22,13 @@ export function appendChildren(
   return parent;
 }
 
-export function createEle(tagName: string, template: string) {
+function createEle(tagName: string, template: string) {
   const ele = document.createElement(tagName);
   ele.innerHTML = template;
   return ele;
 }
 
-export function innerTeamplate(teamplate: string) {
+function innerTeamplate(teamplate: string) {
   const self: HTMLElement = this;
   self.innerHTML = teamplate;
 }

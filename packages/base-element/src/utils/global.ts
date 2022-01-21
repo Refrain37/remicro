@@ -3,3 +3,10 @@ export function register(name: string, instance) {
     window.customElements.define(name, instance);
   }
 }
+
+export function createTeamplate(getTeamplate: () => string): (obj) => string {
+  const fn: (obj) => string = obj => {
+    return getTeamplate.call(obj);
+  };
+  return fn;
+}
