@@ -38,8 +38,25 @@ function getPackages() {
     return packages;
 }
 
+function delDir(path) {
+    let files = [];
+    if (fs.existsSync(path)) {
+        files = fs.readdirSync(path);
+        files.forEach(f => {
+            const currPath = `${path}/${f}`;
+            if (fs.statSync(currPath).isDirectory()) {
+                delDir(currPath);
+            } else {
+                fs.unlinkSync(currPath);
+            }
+        });
+        fs.rmdirSync(path);
+    }
+}
+
 module.exports = {
     getArg,
     runParallel,
     getPackages,
+    delDir,
 };

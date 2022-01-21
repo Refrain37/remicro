@@ -1,5 +1,4 @@
 const path = require('path');
-const { exec } = require('child_process');
 const utils = require('./utils');
 
 const package = utils.getArg('name') || '';
@@ -20,7 +19,6 @@ async function cleanAll() {
 }
 
 async function clean(package) {
-    // exec('rm -rf ./dist', (err, stdout, stderr) => {
-    //     console.log(package, stdout);
-    // });
+    const dist = path.resolve(`packages/${package}/dist`);
+    utils.delDir(dist);
 }
