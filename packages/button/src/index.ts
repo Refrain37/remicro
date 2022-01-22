@@ -2,7 +2,7 @@ import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
 import getTeamplate from './teamplate';
 
-const props = ['content', 'type', 'href', 'loading'];
+const props = ['content', 'type', 'href', 'loading', 'disabled'];
 
 export default class RmButton extends BaseElement {
   static props = props;
@@ -33,6 +33,9 @@ export default class RmButton extends BaseElement {
   }
   get type() {
     return this.getAttribute('type');
+  }
+  get disabled() {
+    return this.getAttribute('disabled');
   }
   get href() {
     return this.getAttribute('href');

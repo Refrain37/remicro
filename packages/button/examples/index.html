@@ -6,10 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .main-btn {
+            margin: 100px auto;
+        }
+    </style>
 </head>
 
 <body>
-    <rm-btn content="test" type="primary" id="btn"></rm-btn>
+    <rm-btn class="main-btn" content="test_test_test_test" type="primary" id="btn" disabled="true"></rm-btn>
     <script type="module" src="../dist/index.esm.js"></script>
     <script>
         const btn = document.getElementById('btn')

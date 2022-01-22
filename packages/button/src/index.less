@@ -1,15 +1,41 @@
 .btn{
-  background-color: gray;
-  padding: 10px 30px;
-  border: 0px;
-  border-radius: 4px;
-  color: #fff;
-  transition: all .3s;
+  min-width: 100px;
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: #fff;
   font-size: var(--font-size);
+  color: #333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: all var(--duration);
+  &:hover{
+    background-color: var(--color-bg-hover);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
 }
 
 .primary-btn {
+  border: none;
+  background-color: var(--color-primary);
+  color: var(--color-text);
   &:hover{
-    background-color: aquamarine;
+    background-color: var(--color-primary-hover);
+    color: var(--color-text);
+  }
+}
+
+.link-btn {
+  border: none;
+  padding: 0;
+  background: none;
+  color: var(--color-primary);
+  font-size: calc(var(--font-size) * 1.5);
+  &:hover{
+    background: none;
+    color: var(--color-primary-hover);
   }
 }
