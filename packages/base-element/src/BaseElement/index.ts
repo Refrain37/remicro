@@ -35,10 +35,16 @@ export default class BaseElement
   innerTeamplate = methods.innerTeamplate;
 
   /* origin life-cycle */
-  connectedCallback() {}
-  disconnectedCallback() {}
+  connectedCallback() {
+    this.init();
+    this.render();
+  }
+  disconnectedCallback() {
+    this.destroy();
+  }
   adoptedCallback() {}
   attributeChangedCallback() {
+    this.update();
     this.render();
   }
 
