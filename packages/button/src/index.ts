@@ -2,40 +2,51 @@ import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
 import getTeamplate from './teamplate';
 
-const props = ['content', 'type', 'href', 'loading', 'disabled'];
+const props = ['content', 'type', 'href', 'size', 'loading', 'disabled'];
 
 export default class RmButton extends BaseElement {
   static props = props;
+  btn = null;
+
   constructor() {
     super();
-    this.addEventListener('click', () => {
-      this.handleClick();
-    });
   }
 
   render() {
     const teamplate = getTeamplate(this);
-    this.innerTeamplate(teamplate);
+    this.btn = this.innerTeamplate(teamplate);
+    this.btn.addEventListener('click', e => {
+      this.handleClick(e);
+    });
   }
 
   /* event */
-  handleClick() {
-    console.log('test');
+  handleClick(e) {
+    const disabled = this.disabled;
+    if (disabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
     const href = this.href;
-    if (href) {
+    const type = this.type;
+    if (href && type === 'link') {
       window.open(`https://${href}`, '_blank');
     }
   }
 
   /* props */
   get content() {
-    return this.getAttribute('content');
+    return this.getAttribute('content') || 'Button';
   }
   get type() {
     return this.getAttribute('type');
   }
+  get size() {
+    return this.getAttribute('size');
+  }
   get disabled() {
-    return this.getAttribute('disabled');
+    return this.getAttribute('disabled') !== null;
   }
   get href() {
     return this.getAttribute('href');

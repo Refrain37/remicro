@@ -31,6 +31,7 @@ function createEle(tagName: string, template: string) {
 function innerTeamplate(teamplate: string) {
   const self: HTMLElement = this;
   self.innerHTML = teamplate;
+  return self.children[0];
 }
 
 export const methods: IMethods = {

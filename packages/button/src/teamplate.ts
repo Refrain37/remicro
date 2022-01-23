@@ -4,8 +4,9 @@ export default createTeamplate(function () {
   return `
   <button class="btn ${
     this.type ? this.type + '-btn' : ''
-  } ${this.disabled == 'true' ? 'btn-disabled' : ''}">
-    ${this.loading == 'true' ? 'loading' : this.content}
+  } ${this.disabled && 'btn-disabled'}
+    ${this.size}">
+    ${this.loading == 'true' ? 'loading...' : this.content}
   </button>
   `;
 });
