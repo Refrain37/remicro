@@ -14,13 +14,26 @@
             align-items: center;
             justify-content: center;
         }
+        
+        .main-input {
+            width: 200px;
+        }
     </style>
 </head>
 
 <body>
-    <rm-input></rm-input>
+    <rm-input class="main-input" id="input" value="test" size="bigger"></rm-input>
     <script type="module" src="../dist/index.esm.js"></script>
     <script>
+        const input = document.getElementById('input')
+        input.addEventListener('valChanged', (e) => {
+            const {
+                detail: {
+                    value
+                }
+            } = e
+            console.log(value)
+        })
     </script>
 </body>
 
