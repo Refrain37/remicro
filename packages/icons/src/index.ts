@@ -4,11 +4,26 @@ import getTeamplate from './teamplate';
 
 const props = [];
 
-export default class RmInput extends BaseElement {
+export default class RmIcon extends BaseElement {
   static props = props;
 
   constructor() {
     super();
+    this.appendLink();
+  }
+
+  appendLink() {
+    if (document.getElementById('rm-icon-link')) {
+      return;
+    }
+    const linkEle = document.createElement('link');
+    linkEle.setAttribute('id', 'rm-icon-link');
+    linkEle.setAttribute('rel', 'stylesheet');
+    linkEle.setAttribute(
+      'href',
+      '//at.alicdn.com/t/font_3160431_5xbrxp1pzw6.css'
+    );
+    document.head.append(linkEle);
   }
 
   render() {
@@ -25,4 +40,4 @@ export default class RmInput extends BaseElement {
   }
 }
 
-register('rm-input', RmInput);
+register('rm-icon', RmIcon);
