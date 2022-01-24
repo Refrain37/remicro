@@ -3,10 +3,9 @@ import './index.less';
 import getTeamplate from './teamplate';
 
 const props = ['value', 'placeholder', 'type', 'size', 'disabled'];
-
 export default class RmInput extends BaseElement {
   static props = props;
-  btn = null;
+  input = null;
 
   constructor() {
     super();
@@ -14,7 +13,25 @@ export default class RmInput extends BaseElement {
 
   render() {
     const teamplate = getTeamplate(this);
-    this.innerTeamplate(teamplate);
+    this.input = this.innerTeamplate(teamplate);
+    this.input.addEventListener('focusout', (e: FocusEvent) => {
+      this.handleChange(e);
+    });
+  }
+
+  handleChange(e: FocusEvent) {
+    const { target } = e;
+    const { value } = target as any;
+    if (this.validate(value)) {
+      console.log('success');
+    } else {
+      console.log('fail');
+    }
+  }
+
+  validate(value) {
+    console.log(value);
+    return false;
   }
 
   /* props */
