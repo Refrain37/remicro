@@ -14,13 +14,19 @@
             align-items: center;
             justify-content: center;
         }
+        
+        .warn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body>
-    <rm-icon></rm-icon>
-    <rm-icon></rm-icon>
-
+    <span class="warn">
+        <rm-icon name="jinggao" class-name="warning" styles="padding:10px;" color="red"></rm-icon>小心
+    </span>
     <script type="module" src="../dist/index.esm.js"></script>
     <script>
     </script>

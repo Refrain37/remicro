@@ -2,7 +2,7 @@ import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
 import getTeamplate from './teamplate';
 
-const props = [];
+const props = ['name', 'className', 'styles', 'color'];
 
 export default class RmIcon extends BaseElement {
   static props = props;
@@ -32,11 +32,17 @@ export default class RmIcon extends BaseElement {
   }
 
   /* props */
-  get type() {
-    return this.getAttribute('type') || 'text';
+  get name() {
+    return this.getAttribute('name') || '';
   }
-  get size() {
-    return this.getAttribute('size');
+  get className() {
+    return this.getAttribute('class-name');
+  }
+  get styles() {
+    return this.getAttribute('styles');
+  }
+  get color() {
+    return this.getAttribute('color');
   }
 }
 
