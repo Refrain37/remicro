@@ -1,11 +1,11 @@
-# `icon`
+# `loading`
 
 > TODO: description
 
 ## Usage
 
 ```
-const icon = require('input');
+const loading = require('loading');
 
 // TODO: DEMONSTRATE API
 ```

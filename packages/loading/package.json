@@ -1,5 +1,5 @@
 {
-    "name": "@remicro.js/button",
+    "name": "@remicro.js/loading",
     "version": "0.0.10",
     "description": "> TODO: description",
     "author": "许泓杰 <965926581@qq.com>",
@@ -31,6 +31,7 @@
     },
     "dependencies": {
         "@remicro.js/base-element": "^0.0.10",
-        "@remicro.js/loading": "^0.0.10"
+        "@remicro.js/utils": "^0.0.10",
+        "@remicro.js/icons": "^0.0.10"
     }
 }

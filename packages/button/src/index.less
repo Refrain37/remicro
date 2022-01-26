@@ -67,3 +67,19 @@
     background-color: #fff;
   }
 }
+
+.btn-loading{
+  cursor:not-allowed;
+  &::after {
+    opacity: .3;
+    content: ' ';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    z-index: 1;
+    border-radius: var(--border-radius);
+    background-color: #fff;
+  }
+}

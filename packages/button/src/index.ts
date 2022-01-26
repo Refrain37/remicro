@@ -1,9 +1,10 @@
 import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
 import getTeamplate from './teamplate';
+import { defineLoading } from '@remicro.js/loading';
+defineLoading();
 
 const props = ['content', 'type', 'href', 'size', 'loading', 'disabled'];
-
 export default class RmButton extends BaseElement {
   static props = props;
   btn = null;
@@ -56,4 +57,8 @@ export default class RmButton extends BaseElement {
   }
 }
 
-register('rm-btn', RmButton);
+export function defineButton() {
+  register('rm-btn', RmButton);
+}
+
+defineButton();

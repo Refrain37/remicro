@@ -1,0 +1,29 @@
+.rm-loading-container{
+  width: 100%;
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-primary);
+  font-size: calc(var(--font-size) + 2px);
+  z-index: 9999;
+}
+
+.rm-loading{
+  animation: rotate 1s infinite linear;
+  @keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.rm-loading-mask{
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.1);
+}

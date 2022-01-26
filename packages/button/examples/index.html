@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <rm-btn class="main-btn" size="" type="primary" id="btn" disabled></rm-btn>
+    <rm-btn class="main-btn" size="" type="primary" id="btn"></rm-btn>
     <script type="module" src="../dist/index.esm.js"></script>
     <script>
         const btn = document.getElementById('btn')
@@ -31,7 +31,7 @@
             btn.setAttribute('loading', 'true')
             setTimeout(() => {
                 btn.setAttribute('loading', 'false')
-            }, 1000)
+            }, 100000)
         })
     </script>
 </body>
