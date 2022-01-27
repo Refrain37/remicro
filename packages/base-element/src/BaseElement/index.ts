@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { methods, IMethods } from '../utils/index';
+import { createHashStr } from '@remicro.js/utils';
 
 interface IOriginLifeCycle {
   connectedCallback?: () => void;
@@ -24,6 +25,7 @@ export default class BaseElement
   implements ILifeCycle, IMethods, IOriginLifeCycle
 {
   static props = [];
+  rmId = createHashStr();
   constructor() {
     super();
   }
