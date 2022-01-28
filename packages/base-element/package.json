@@ -1,6 +1,6 @@
 {
     "name": "@remicro.js/base-element",
-    "version": "0.0.10",
+    "version": "0.0.11",
     "description": "> TODO: description",
     "author": "许泓杰 <965926581@qq.com>",
     "homepage": "",
@@ -23,8 +23,8 @@
         "typescript": "^4.5.2"
     },
     "dependencies": {
-        "@remicro.js/styles": "^0.0.10",
-        "@remicro.js/utils": "^0.0.10"
+        "@remicro.js/styles": "^0.0.11",
+        "@remicro.js/utils": "^0.0.11"
     },
     "gitHead": "ca09732af7a0d672217b8664302a212662f4e1c1"
 }
