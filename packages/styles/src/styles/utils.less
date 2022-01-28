@@ -7,3 +7,91 @@
 }
 
 .fontsize-loop(40);
+
+.gap-loop(@n, @i: 8) when (@i <=@n) {
+  .mt@{i} {
+      margin-top: unit(@i, px);
+  }
+
+  .mr@{i} {
+      margin-right: unit(@i, px);
+  }
+
+  .mb@{i} {
+      margin-bottom: unit(@i, px);
+  }
+
+  .ml@{i} {
+      margin-left: unit(@i, px);
+  }
+
+  .pt@{i} {
+      padding-top: unit(@i, px);
+  }
+
+  .pr@{i} {
+      padding-right: unit(@i, px);
+  }
+
+  .pb@{i} {
+      padding-bottom: unit(@i, px);
+  }
+
+  .pl@{i} {
+      padding-left: unit(@i, px);
+  }
+
+  .gap-loop(@n, (@i + 8));
+}
+
+.gap-loop(48);
+
+/*常用margin*/
+.margin-loop(@n, @i: 5) when (@i <=@n) {
+  .mt@{i} {
+      margin-top: unit(@i, px);
+  }
+
+  .mr@{i} {
+      margin-right: unit(@i, px);
+  }
+
+  .mb@{i} {
+      margin-bottom: unit(@i, px);
+  }
+
+  .ml@{i} {
+      margin-left: unit(@i, px);
+  }
+
+  .margin-loop(@n, (@i + 5));
+}
+
+.margin-loop(100);
+
+/*常用padding*/
+.padding-loop(@n, @i: 5) when (@i <=@n) {
+  .pt@{i} {
+      padding-top: unit(@i, px);
+  }
+
+  .pr@{i} {
+      padding-right: unit(@i, px);
+  }
+
+  .pb@{i} {
+      padding-bottom: unit(@i, px);
+  }
+
+  .pl@{i} {
+      padding-left: unit(@i, px);
+  }
+
+  .pa@{i} {
+      padding: unit(@i, px);
+  }
+
+  .padding-loop(@n, (@i + 5));
+}
+
+.padding-loop(140);

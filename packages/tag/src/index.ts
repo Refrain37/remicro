@@ -4,48 +4,37 @@ import getTeamplate from './teamplate';
 import { defineIcons } from '@remicro.js/icons';
 defineIcons();
 
-const props = ['color', 'text', 'font-size', 'mask'];
-const MASK = 'rm-loading-mask';
+const props = ['text', 'color', 'type', 'icon'];
 
-export default class RmLoading extends BaseElement {
+export default class RmTag extends BaseElement {
   static props = props;
 
   constructor() {
     super();
   }
 
-  createMask() {
-    if (this.mask && !document.getElementById(MASK)) {
-      const mask = this.createEle('div', '');
-      mask.setAttribute('id', MASK);
-      mask.setAttribute('class', MASK);
-      document.body.appendChild(mask);
-    }
-  }
-
   render() {
     const teamplate = getTeamplate(this);
     this.innerTeamplate(teamplate);
-    this.createMask();
   }
 
   /* props */
-  get color() {
-    return this.getAttribute('color');
-  }
   get text() {
     return this.getAttribute('text') || '';
   }
-  get fontsize() {
-    return this.getAttribute('font-size') || '16';
+  get color() {
+    return this.getAttribute('color');
   }
-  get mask() {
-    return this.getAttribute('mask') !== null;
+  get type() {
+    return this.getAttribute('type') || '';
+  }
+  get icon() {
+    return this.getAttribute('icon') || '';
   }
 }
 
-export function defineLoading() {
-  register('rm-loading', RmLoading);
+export function defineTag() {
+  register('rm-tag', RmTag);
 }
 
-defineLoading();
+defineTag();
