@@ -2,12 +2,13 @@ import { createTeamplate } from '@remicro.js/base-element';
 
 export default createTeamplate(function (props) {
   const { id } = props;
-  const clearIcon = this.showDel
-    ? `<rm-icon class="input-clear" id="input-clear-${id}" name="cuowukongxin"></rm-icon>`
-    : '';
+  const clearIcon =
+    this.showDel && this.type !== 'password'
+      ? `<rm-icon class="input-clear" id="input-clear-${id}" name="cuowukongxin"></rm-icon>`
+      : '';
   const ChangeType =
     this.type === 'password'
-      ? '<span class="input-changeType-icon" id="input-changeType">S</span>'
+      ? `<rm-icon class="input-changeType" id="input-changeType-${id}" name="icon_yulan"></rm-icon>`
       : '';
   const styles =
     this.type === 'password' || this.showDel

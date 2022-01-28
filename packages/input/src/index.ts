@@ -20,12 +20,9 @@ export default class RmInput extends BaseElement {
   render() {
     const teamplate = getTeamplate(this, { id: this.rmId });
     this.Input = this.innerTeamplate(teamplate);
-    this.Input.addEventListener('focusout', (e: FocusEvent) => {
-      this.handleFocusout(e);
+    this.Input.addEventListener('keydown', e => {
+      this.handleChange(e);
     });
-    // this.Input.addEventListener('keyup', e => {
-    //   this.handleChange(e);
-    // });
     this.changeInputType();
     this.bindClear();
   }
@@ -42,7 +39,7 @@ export default class RmInput extends BaseElement {
         const Input: any = this.Input;
         Input.setAttribute('value', '');
         Input.value = '';
-        const focusoutEvent = createEvent('focusout');
+        const focusoutEvent = createEvent('keydown');
         Input.dispatchEvent(focusoutEvent);
       });
     }
@@ -50,7 +47,7 @@ export default class RmInput extends BaseElement {
 
   // 切换input类型
   changeInputType() {
-    const del = document.getElementById('input-changeType');
+    const del = document.getElementById('input-changeType-' + this.rmId);
     if (del && this.type === 'password') {
       del.addEventListener('click', () => {
         const inputType = this.Input.getAttribute('type');
@@ -58,6 +55,7 @@ export default class RmInput extends BaseElement {
           'type',
           inputType === 'text' ? 'password' : 'text'
         );
+        del.setAttribute('name', inputType === 'text' ? 'icon_yulan' : 'miwen');
       });
     }
   }
@@ -73,26 +71,15 @@ export default class RmInput extends BaseElement {
     const {
       target: { value },
     } = e;
-    console.log(value.length);
+
+    // style change
     if (value.length > 0) {
-      // this.Clear.style.display = ''
+      this.Clear.style.display = 'block';
     } else {
-      console.log('first');
       this.Clear.style.display = 'none';
     }
-  }
 
-  handleFocusout(e) {
-    console.log('focusout');
-    const disabled = this.disabled;
-    if (disabled) {
-      e.preventDefault();
-      e.stopPropagation();
-      return;
-    }
-    const {
-      target: { value },
-    } = e;
+    // trigger
     const event = createEvent(VALCHANGED, { value });
     this.dispatchEvent(event);
   }
