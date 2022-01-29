@@ -1,0 +1,36 @@
+{
+    "name": "@remicro.js/app",
+    "version": "0.0.11",
+    "description": "> TODO: description",
+    "author": "许泓杰 <965926581@qq.com>",
+    "homepage": "https://github.com/Refrain37/remicro#readme",
+    "license": "ISC",
+    "main": "index.js",
+    "module": "dist/index.esm.js",
+    "umd": "dist/index.umd.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "index.js"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Refrain37/remicro.git"
+    },
+    "scripts": {
+        "test": "echo \"Error: run tests from root\" && exit 1"
+    },
+    "bugs": {
+        "url": "https://github.com/Refrain37/remicro/issues"
+    },
+    "devDependencies": {
+        "typescript": "^4.5.2"
+    },
+    "dependencies": {
+        "@remicro.js/base-element": "^0.0.11",
+        "@remicro.js/utils": "^0.0.11"
+    }
+}

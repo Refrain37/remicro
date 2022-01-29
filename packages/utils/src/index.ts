@@ -10,3 +10,9 @@ export function createHashStr(len = 10) {
   }
   return hashStr;
 }
+
+export async function dataFetch(url: string, config?: RequestInit) {
+  // formate config
+  const res = await fetch(url, config);
+  return res;
+}
