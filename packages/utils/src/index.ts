@@ -11,8 +11,15 @@ export function createHashStr(len = 10) {
   return hashStr;
 }
 
-export async function dataFetch(url: string, config?: RequestInit) {
+interface IConfig extends RequestInit {
+  format?: string;
+}
+
+export async function dataFetch(url: string, config?: IConfig): Promise<any> {
   // formate config
-  const res = await fetch(url, config);
+  let res = await fetch(url, config);
+  if (config.format && res[config.format]) {
+    res = await res[config.format]();
+  }
   return res;
 }

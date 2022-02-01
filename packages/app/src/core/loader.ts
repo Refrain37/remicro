@@ -4,8 +4,8 @@ import { dataFetch } from '@remicro.js/utils';
 // load html
 export async function loadHtml(url) {
   try {
-    const res = await dataFetch(url);
-    console.log(res);
+    const htmlStr = await dataFetch(url, { format: 'text' });
+    return htmlStr;
   } catch (error) {
     console.log(error);
   }

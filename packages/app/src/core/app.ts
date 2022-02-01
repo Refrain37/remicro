@@ -1,11 +1,13 @@
 import { loadHtml } from './loader';
+import { formateHtmlStr, getStatic } from './handles';
+import RMApp from '..';
 
 export const appCache = new Map<string, any>();
 
 interface IConfig {
   name: string;
   url: string;
-  container: HTMLElement;
+  container: RMApp;
 }
 
 export enum STATUS {
@@ -15,16 +17,17 @@ export enum STATUS {
   DESTROYED = 'destroyed',
 }
 
-interface IApp {
+export interface IApp {
   name: string;
   url: string;
-  container: HTMLElement;
+  container: RMApp;
   status: STATUS;
 }
 
-export function createApp(config: IConfig) {
+export async function createApp(config: IConfig) {
   // initial
   const { name, url, container } = config;
+  container.status = STATUS.LOADIND;
   const app: IApp = {
     name,
     url,
@@ -32,7 +35,14 @@ export function createApp(config: IConfig) {
     status: STATUS.LOADIND,
   };
 
-  // load source
-  loadHtml(url);
+  /* load source */
+  // load html
+  const htmlStr = await loadHtml(url);
+  const formatedHtmlStr = await formateHtmlStr(htmlStr);
+  const appDom = document.createElement('div');
+  appDom.innerHTML = formatedHtmlStr;
+
+  // load static
+  getStatic(appDom, app);
   return app;
 }
