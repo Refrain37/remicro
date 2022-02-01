@@ -16,7 +16,7 @@ async function start() {
 }
 
 async function buildAll() {
-    const packages = utils.changeOrder(utils.getPackages());
+    const packages = utils.getPackages();
     await utils.runParallel(require('os').cpus().length, packages, build);
 }
 

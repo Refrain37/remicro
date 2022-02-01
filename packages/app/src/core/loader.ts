@@ -3,5 +3,10 @@ import { dataFetch } from '@remicro.js/utils';
 
 // load html
 export async function loadHtml(url) {
-  const res = await dataFetch(url);
+  try {
+    const res = await dataFetch(url);
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
 }
