@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { priority } = require('./config.js');
 
 function getArg(name) {
     const args = process.argv.slice(2);
@@ -54,9 +55,20 @@ function delDir(path) {
     }
 }
 
+function changeOrder(packages) {
+    const list = [...priority];
+    packages.forEach(p => {
+        if (!priority.includes(p)) {
+            list.push(p);
+        }
+    });
+    return list;
+}
+
 module.exports = {
     getArg,
     runParallel,
     getPackages,
     delDir,
+    changeOrder,
 };

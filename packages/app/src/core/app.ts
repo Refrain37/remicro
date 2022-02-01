@@ -33,6 +33,6 @@ export function createApp(config: IConfig) {
   };
 
   // load source
-  loadHtml();
+  loadHtml(url);
   return app;
 }
