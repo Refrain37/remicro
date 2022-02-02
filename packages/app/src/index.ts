@@ -1,19 +1,18 @@
 import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
-import getTeamplate from './teamplate';
-import { appCache, createApp, STATUS } from './core';
+import { appCache, createApp, IApp } from './core';
 
-const props = ['name', 'url', 'open-shadow'];
+const props = ['name', 'url', 'open-shadow', 'is-cache'];
 
 export default class RMApp extends BaseElement {
   static props = props;
-  status = STATUS.CREATED;
-  app = null;
+  app: IApp = null;
 
   constructor() {
     super();
   }
 
+  // check props
   check() {
     if (!this.name || !this.url) {
       throw TypeError('err');
@@ -22,10 +21,10 @@ export default class RMApp extends BaseElement {
   }
 
   /* life cycle */
-  init() {
-    console.log('init');
+  async init() {
     if (this.check()) {
-      const app = createApp({
+      // 创建容器，拉取资源
+      const app = await createApp({
         name: this.name,
         url: this.url,
         container: this,
@@ -36,12 +35,15 @@ export default class RMApp extends BaseElement {
   }
 
   mount() {
+    this.app.mount();
     console.log('mount');
   }
 
   destroy() {
-    console.log('destroy');
-    appCache.delete(this.name);
+    if (!this.isCache) {
+      this.app.unmount();
+      appCache.delete(this.name);
+    }
   }
 
   /* props */
@@ -53,6 +55,9 @@ export default class RMApp extends BaseElement {
   }
   get isOpenShadow() {
     return this.getAttribute('open-shadow') === 'true';
+  }
+  get isCache() {
+    return this.getAttribute('is-cache') === 'true';
   }
 }
 
