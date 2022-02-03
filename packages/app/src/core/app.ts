@@ -17,9 +17,15 @@ export enum STATUS {
   DESTROYED = 'destroyed',
 }
 
-interface ISource {
-  links: Map<string, any>;
-  scripts: Map<string, any>;
+interface ISourceItem {
+  code: string; // 代码内容
+  isExternal?: boolean; // 是否外部导入
+}
+
+export interface ISource {
+  domSource: HTMLElement | Element;
+  links: Map<string, ISourceItem>;
+  scripts: Map<string, ISourceItem>;
 }
 
 export interface IApp {
@@ -46,6 +52,7 @@ export class App implements IApp {
     this.container = container;
     this.status = STATUS.LOADIND;
     this.source = {
+      domSource: null,
       links: new Map<string, any>(),
       scripts: new Map<string, any>(),
     };
@@ -56,17 +63,20 @@ export class App implements IApp {
   async load() {
     // load html
     const htmlStr = await loadHtml(this.url);
-    const formatedHtmlStr = await formateHtmlStr(htmlStr);
+    const formattedHtmlStr = await formateHtmlStr(htmlStr);
     const appDom = document.createElement('teamplate');
-    appDom.innerHTML = formatedHtmlStr;
+    appDom.innerHTML = formattedHtmlStr;
+    this.source.domSource = appDom;
     // load static
-    getStatic(appDom, this);
+    getStatic(this.source);
   }
 
   mount() {
+    this.status = STATUS.MOUNTED;
     console.log('mount');
   }
   unmount() {
+    this.status = STATUS.DESTROYED;
     console.log('unmount');
   }
 }
