@@ -1,4 +1,4 @@
-import { loadHtml } from './loader';
+import { loadHtml, loadLinks, loadScripts } from './loader';
 import { formateHtmlStr, getStatic } from './handles';
 import RMApp from '..';
 
@@ -53,14 +53,15 @@ export class App implements IApp {
     this.status = STATUS.LOADIND;
     this.source = {
       domSource: null,
-      links: new Map<string, any>(),
-      scripts: new Map<string, any>(),
+      links: new Map<string, ISourceItem>(),
+      scripts: new Map<string, ISourceItem>(),
     };
     this.load();
   }
 
   /* load source */
   async load() {
+    // load start
     // load html
     const htmlStr = await loadHtml(this.url);
     const formattedHtmlStr = await formateHtmlStr(htmlStr);
@@ -69,6 +70,14 @@ export class App implements IApp {
     this.source.domSource = appDom;
     // load static
     getStatic(this.source);
+    if (this.source.links.size) {
+      loadLinks(this);
+    }
+    if (this.source.scripts.size) {
+      loadScripts(this);
+    }
+
+    // load end
   }
 
   mount() {

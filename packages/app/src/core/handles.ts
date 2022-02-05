@@ -19,7 +19,6 @@ export async function formateHtmlStr(htmlStr: string) {
 export async function getStatic(source: ISource) {
   const { domSource: dom } = source;
   extractDom(dom, source);
-  console.log(source);
 }
 
 function extractDom(parent: HTMLElement | Element, source: ISource) {
@@ -70,7 +69,7 @@ function getScript(
     const name = createHashStr(12);
     source.scripts.set(name, {
       code: dom.textContent,
-      isExternal: true,
+      isExternal: false,
     });
   }
   parent.removeChild(dom);
