@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { methods, IMethods } from '../utils/index';
+import { methods, IMethods } from '../methods/index';
 import { createHashStr } from '@remicro.js/utils';
+import { IChanged } from '../shaped';
 
 interface IOriginLifeCycle {
   connectedCallback?: () => void;
@@ -16,7 +17,7 @@ interface IOriginLifeCycle {
 interface ILifeCycle {
   init?: () => any;
   render?: () => any;
-  update?: () => any;
+  update?: (changed?: IChanged) => any;
   destroy?: () => any;
 }
 
@@ -45,8 +46,13 @@ export default class BaseElement
     this.destroy();
   }
   adoptedCallback() {}
-  attributeChangedCallback() {
-    this.update();
+  attributeChangedCallback(...args) {
+    const changed: IChanged = {
+      attrName: args[0],
+      oldVal: args[1],
+      newVal: args[2],
+    };
+    this.update(changed);
     this.render();
   }
 
@@ -57,6 +63,6 @@ export default class BaseElement
   /* life-cycle */
   init() {}
   render() {}
-  update() {}
+  update(changed: IChanged) {}
   destroy() {}
 }

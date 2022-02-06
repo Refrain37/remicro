@@ -1,5 +1,4 @@
-import BaseElement, { register } from '@remicro.js/base-element';
-import './index.less';
+import BaseElement, { IChanged, register } from '@remicro.js/base-element';
 import { appCache, createApp, IApp, setGlobalEnv } from './core';
 
 const props = ['name', 'url', 'open-shadow', 'is-cache', 'global-static'];
@@ -10,7 +9,7 @@ export default class RMApp extends BaseElement {
 
   constructor() {
     super();
-    !this.globalStatic && this.setWebackEnv();
+    !this.globalStatic && this.setWebackEnv(); // set env while webpack and not use global static
   }
 
   /* methods */
@@ -20,7 +19,7 @@ export default class RMApp extends BaseElement {
       url += '/';
     }
     setGlobalEnv('__RM_APP_ENV__', true);
-    setGlobalEnv('__RM_APP_PUBLIC_PATH__', url); // 静态资源路径运行时补齐
+    setGlobalEnv('__RM_APP_PUBLIC_PATH__', url); // auto-complete path while in webpack
   }
 
   // check props
@@ -34,7 +33,6 @@ export default class RMApp extends BaseElement {
   /* life cycle */
   async init() {
     if (this.check()) {
-      // 创建容器，拉取资源
       const app = await createApp({
         name: this.name,
         url: this.url,
@@ -45,9 +43,8 @@ export default class RMApp extends BaseElement {
     }
   }
 
-  mount() {
-    this.app.mount();
-    console.log('mount');
+  update(changed: IChanged): void {
+    console.log(changed);
   }
 
   destroy() {

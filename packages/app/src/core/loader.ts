@@ -12,6 +12,8 @@ export async function loadHtml(url) {
   }
 }
 
+// load links
+// include styles and prefetch
 export async function loadLinks(app: IApp) {
   const links = Array.from(app.source.links.entries());
   const baseURl = app.url;
@@ -34,6 +36,7 @@ export async function loadLinks(app: IApp) {
   }
 }
 
+// load scripts
 export async function loadScripts(app: IApp) {
   const scripts = Array.from(app.source.scripts.entries());
   const baseURl = app.url;
