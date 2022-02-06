@@ -8,24 +8,56 @@ export async function loadHtml(url) {
     const htmlStr = await dataFetch(url, { format: 'text' });
     return htmlStr;
   } catch (error) {
-    console.log(error);
+    console.log('ERR:load html ', error);
   }
 }
 
 export async function loadLinks(app: IApp) {
   const links = Array.from(app.source.links.entries());
-  const fetchLinkPromises = links.map(l => {
-    return l;
-  });
-  console.log('links');
+  const baseURl = app.url;
+  const fetchLinkPromises = links.map(l =>
+    dataFetch(baseURl + l[0], { format: 'text' })
+  );
+
+  try {
+    const res = await Promise.all(fetchLinkPromises);
+    res.forEach((code, index) => {
+      const url = links[index][0];
+      const sourceBody = app.source.links.get(url);
+      if (sourceBody) {
+        sourceBody.code = code;
+        app.source.links.set(url, sourceBody);
+      }
+    });
+  } catch (error) {
+    console.log('ERR:load links ', error);
+  }
 }
 
 export async function loadScripts(app: IApp) {
   const scripts = Array.from(app.source.scripts.entries());
-  const fetchScriptPromise = [];
+  const baseURl = app.url;
+  const fetchScriptPromises = [];
   scripts.forEach(s => {
-    if (s[1].isExternal === true) {
+    const [url, info] = s;
+    if (info.isExternal === true) {
+      fetchScriptPromises.push(dataFetch(baseURl + url, { format: 'text' }));
+    } else {
+      fetchScriptPromises.push(Promise.resolve(info.code));
     }
   });
-  console.log(scripts);
+
+  try {
+    const res = await Promise.all(fetchScriptPromises);
+    res.forEach((code, index) => {
+      const url = scripts[index][0];
+      const sourceBody = app.source.scripts.get(url);
+      if (sourceBody) {
+        sourceBody.code = code;
+        app.source.scripts.set(url, sourceBody);
+      }
+    });
+  } catch (error) {
+    console.log('ERR:load script ', error);
+  }
 }

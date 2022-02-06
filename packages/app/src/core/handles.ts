@@ -16,6 +16,7 @@ export async function formateHtmlStr(htmlStr: string) {
     });
 }
 
+// load static
 export async function getStatic(source: ISource) {
   const { domSource: dom } = source;
   extractDom(dom, source);
@@ -73,4 +74,16 @@ function getScript(
     });
   }
   parent.removeChild(dom);
+}
+
+// add-style
+
+// runScript
+export async function runScipts(source: ISource) {
+  const scripts = Array.from(source.scripts.entries());
+  scripts.forEach(s => {
+    const [url, info] = s;
+    const code = info.code;
+    (0, eval)(code);
+  });
 }

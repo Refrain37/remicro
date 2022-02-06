@@ -15,10 +15,13 @@ interface IConfig extends RequestInit {
   format?: string;
 }
 
-export async function dataFetch(url: string, config?: IConfig): Promise<any> {
+export async function dataFetch(
+  url: string,
+  config: IConfig = {}
+): Promise<any> {
   // formate config
   let res = await fetch(url, config);
-  if (config.format && res[config.format]) {
+  if (config && config.format && res[config.format]) {
     res = await res[config.format]();
   }
   return res;

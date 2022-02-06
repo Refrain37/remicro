@@ -1,5 +1,5 @@
 import { loadHtml, loadLinks, loadScripts } from './loader';
-import { formateHtmlStr, getStatic } from './handles';
+import { formateHtmlStr, getStatic, runScipts } from './handles';
 import RMApp from '..';
 
 export const appCache = new Map<string, IApp>();
@@ -32,16 +32,18 @@ export interface IApp {
   name: string;
   url: string;
   container: RMApp;
+  mountCount: number;
   status: STATUS;
   source: ISource;
   mount: () => void;
-  unmount: () => void;
+  destroy: () => void;
 }
 
 export class App implements IApp {
   name: string;
   url: string;
   container: RMApp;
+  mountCount: number;
   status: STATUS = STATUS.CREATED;
   source: ISource;
 
@@ -50,6 +52,7 @@ export class App implements IApp {
     this.name = name;
     this.url = url;
     this.container = container;
+    this.mountCount = 0;
     this.status = STATUS.LOADIND;
     this.source = {
       domSource: null,
@@ -71,20 +74,34 @@ export class App implements IApp {
     // load static
     getStatic(this.source);
     if (this.source.links.size) {
-      loadLinks(this);
+      await loadLinks(this);
+      // TODO:添加样式到head
     }
     if (this.source.scripts.size) {
-      loadScripts(this);
+      await loadScripts(this);
     }
 
     // load end
+    // TODO:maybe remove
+    if (this.status !== STATUS.MOUNTED && this.mountCount === 0) {
+      this.mount();
+    }
   }
 
   mount() {
+    this.mountCount += 1;
     this.status = STATUS.MOUNTED;
-    console.log('mount');
+    const cloneDomSource = this.source.domSource.cloneNode(true);
+    const fragment = document.createDocumentFragment();
+    Array.from(cloneDomSource.childNodes).forEach(node => {
+      fragment.appendChild(node);
+    });
+    this.container.appendChild(fragment);
+
+    // run scripts
+    runScipts(this.source);
   }
-  unmount() {
+  destroy() {
     this.status = STATUS.DESTROYED;
     console.log('unmount');
   }
