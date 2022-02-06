@@ -1,8 +1,8 @@
 import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
-import { appCache, createApp, IApp } from './core';
+import { appCache, createApp, IApp, setGlobalEnv } from './core';
 
-const props = ['name', 'url', 'open-shadow', 'is-cache'];
+const props = ['name', 'url', 'open-shadow', 'is-cache', 'global-static'];
 
 export default class RMApp extends BaseElement {
   static props = props;
@@ -10,6 +10,17 @@ export default class RMApp extends BaseElement {
 
   constructor() {
     super();
+    !this.globalStatic && this.setWebackEnv();
+  }
+
+  /* methods */
+  setWebackEnv() {
+    let url = this.url;
+    if (this.url[this.url.length - 1] !== '/') {
+      url += '/';
+    }
+    setGlobalEnv('__RM_APP_ENV__', true);
+    setGlobalEnv('__RM_APP_PUBLIC_PATH__', url); // 静态资源路径运行时补齐
   }
 
   // check props
@@ -41,7 +52,7 @@ export default class RMApp extends BaseElement {
 
   destroy() {
     if (!this.isCache) {
-      this.app.unmount();
+      this.app.destroy();
       appCache.delete(this.name);
     }
   }
@@ -58,6 +69,9 @@ export default class RMApp extends BaseElement {
   }
   get isCache() {
     return this.getAttribute('is-cache') === 'true';
+  }
+  get globalStatic() {
+    return this.getAttribute('global-static') !== null;
   }
 }
 

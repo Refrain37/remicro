@@ -1,5 +1,5 @@
 import { loadHtml, loadLinks, loadScripts } from './loader';
-import { formateHtmlStr, getStatic, runScipts } from './handles';
+import { formateHtmlStr, getStatic, runScipts } from './handles/index';
 import RMApp from '..';
 
 export const appCache = new Map<string, IApp>();
