@@ -28,7 +28,6 @@ export async function runScipts(app: IApp) {
   scripts.forEach(s => {
     const [url, info] = s;
     const code = info.code;
-    sandbox?.isActive && (0, eval)(sandbox.bindScope(code));
-    (0, eval)(code);
+    sandbox?.isActive ? (0, eval)(sandbox.bindScope(code)) : (0, eval)(code); // 绑定作用域,执行代码
   });
 }
