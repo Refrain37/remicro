@@ -1,5 +1,6 @@
 import BaseElement, { IChanged, register } from '@remicro.js/base-element';
 import { appCache, createApp, IApp, setGlobalEnv } from './core';
+import './index.less';
 
 const props = ['name', 'url', 'open-shadow', 'is-cache', 'global-static'];
 
@@ -44,7 +45,7 @@ export default class RMApp extends BaseElement {
   }
 
   update(changed: IChanged): void {
-    console.log(changed);
+    // console.log(changed);
   }
 
   destroy() {

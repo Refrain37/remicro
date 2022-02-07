@@ -1,5 +1,5 @@
 import { createHashStr } from '@remicro.js/utils';
-import { ISource } from '..';
+import { IApp, ISource } from '..';
 
 export function getScript(
   dom: HTMLElement | Element,
@@ -22,11 +22,13 @@ export function getScript(
   parent.removeChild(dom);
 }
 
-export async function runScipts(source: ISource) {
+export async function runScipts(app: IApp) {
+  const { source, sandbox } = app;
   const scripts = Array.from(source.scripts.entries());
   scripts.forEach(s => {
     const [url, info] = s;
     const code = info.code;
+    sandbox?.isActive && (0, eval)(sandbox.bindScope(code));
     (0, eval)(code);
   });
 }

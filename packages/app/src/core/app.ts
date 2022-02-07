@@ -1,5 +1,6 @@
 import { loadHtml, loadLinks, loadScripts } from './loader';
 import { formateHtmlStr, getStatic, runScipts } from './handles/index';
+import SandBox, { ISandBox } from './sandbox';
 import RMApp from '..';
 
 export const appCache = new Map<string, IApp>();
@@ -35,6 +36,7 @@ export interface IApp {
   mountCount: number;
   status: STATUS;
   source: ISource;
+  sandbox: ISandBox;
   mount: () => void;
   destroy: () => void;
 }
@@ -46,6 +48,7 @@ export class App implements IApp {
   mountCount: number;
   status: STATUS = STATUS.CREATED;
   source: ISource;
+  sandbox: ISandBox;
 
   constructor(config: IConfig) {
     const { name, url, container } = config;
@@ -59,6 +62,7 @@ export class App implements IApp {
       links: new Map<string, ISourceItem>(),
       scripts: new Map<string, ISourceItem>(),
     };
+    this.sandbox = new SandBox(this.name);
     this.load();
   }
 
@@ -98,10 +102,13 @@ export class App implements IApp {
     });
     this.container.appendChild(fragment);
 
+    // open sandbox
+    this.sandbox?.start();
     // run scripts
-    runScipts(this.source);
+    runScipts(this);
   }
   destroy() {
+    this.sandbox?.stop();
     this.status = STATUS.DESTROYED;
     console.log('unmount');
   }
