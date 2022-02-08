@@ -16,10 +16,7 @@ export async function loadHtml(url) {
 // include styles and prefetch
 export async function loadLinks(app: IApp) {
   const links = Array.from(app.source.links.entries());
-  const baseURl = app.url;
-  const fetchLinkPromises = links.map(l =>
-    dataFetch(baseURl + l[0], { format: 'text' })
-  );
+  const fetchLinkPromises = links.map(l => dataFetch(l[0], { format: 'text' }));
 
   try {
     const res = await Promise.all(fetchLinkPromises);

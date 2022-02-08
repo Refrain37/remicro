@@ -1,5 +1,11 @@
 import { loadHtml, loadLinks, loadScripts } from './loader';
-import { formateHtmlStr, getStatic, runScipts } from './handles/index';
+import {
+  formateHtmlStr,
+  getStatic,
+  runScipts,
+  createStyleEles,
+  scopeStyleEle,
+} from './handles/index';
 import SandBox, { ISandBox } from './sandbox';
 import RMApp from '..';
 
@@ -68,24 +74,30 @@ export class App implements IApp {
 
   /* load source */
   async load() {
-    // load start
+    /* load start */
     // load html
     const htmlStr = await loadHtml(this.url);
     const formattedHtmlStr = await formateHtmlStr(htmlStr);
     const appDom = document.createElement('div');
     appDom.innerHTML = formattedHtmlStr;
     this.source.domSource = appDom;
+
     // load static
-    getStatic(this.source);
+    getStatic(this.source, this.name);
     if (this.source.links.size) {
       await loadLinks(this);
-      // TODO:添加样式到head
+      const styleEles = createStyleEles(this.source);
+      // scope style
+      styleEles.forEach(e => {
+        scopeStyleEle(e, this.name);
+      });
     }
     if (this.source.scripts.size) {
       await loadScripts(this);
     }
+    /* load end */
 
-    // load end
+    // mount
     // TODO:maybe remove
     if (this.status !== STATUS.MOUNTED && this.mountCount === 0) {
       this.mount();
