@@ -1,6 +1,6 @@
-import { createTeamplate } from '@remicro.js/base-element';
+import { createTemplate } from '@remicro.js/base-element';
 
-export default createTeamplate(function (props) {
+export default createTemplate(function (props) {
   const { id } = props;
   const clearIcon =
     this.showDel && this.type !== 'password'

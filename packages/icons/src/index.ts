@@ -1,6 +1,6 @@
 import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
-import getTeamplate from './teamplate';
+import getTemplate from './template';
 
 const props = ['name', 'className', 'styles', 'color', 'font-size'];
 
@@ -27,8 +27,8 @@ export default class RmIcon extends BaseElement {
   }
 
   render() {
-    const teamplate = getTeamplate(this);
-    this.innerTeamplate(teamplate);
+    const template = getTemplate(this);
+    this.innerTemplate(template);
   }
 
   /* props */

@@ -33,9 +33,9 @@ export default class BaseElement
 
   /* methods */
   appendChildren = methods.appendChildren;
-  createTeamplate = methods.createTeamplate;
+  createTemplate = methods.createTemplate;
   createEle = methods.createEle;
-  innerTeamplate = methods.innerTeamplate;
+  innerTemplate = methods.innerTemplate;
 
   /* origin life-cycle */
   connectedCallback() {

@@ -1,7 +1,7 @@
 import BaseElement, { register } from '@remicro.js/base-element';
 import { createEvent } from '@remicro.js/utils';
 import './index.less';
-import getTeamplate from './teamplate';
+import getTemplate from './template';
 import { defineIcons } from '@remicro.js/icons';
 defineIcons();
 
@@ -18,8 +18,8 @@ export default class RmInput extends BaseElement {
   }
 
   render() {
-    const teamplate = getTeamplate(this, { id: this.rmId });
-    this.Input = this.innerTeamplate(teamplate);
+    const template = getTemplate(this, { id: this.rmId });
+    this.Input = this.innerTemplate(template);
     this.Input.addEventListener('keydown', e => {
       this.handleChange(e);
     });

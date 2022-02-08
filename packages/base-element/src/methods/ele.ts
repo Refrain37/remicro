@@ -1,11 +1,11 @@
 export interface IMethods {
-  createTeamplate: (html: string, css: string) => string;
+  createTemplate: (html: string, css: string) => string;
   appendChildren: (parent: HTMLElement, child: HTMLElement) => HTMLElement;
-  createEle: (tagName: string, teamplate: string) => HTMLElement;
-  innerTeamplate: (teamplate: string) => HTMLElement;
+  createEle: (tagName: string, template: string) => HTMLElement;
+  innerTemplate: (template: string) => HTMLElement;
 }
 
-function createTeamplate(html: string, css: string) {
+function createTemplate(html: string, css: string) {
   return `
     <style>
     ${css}
@@ -28,15 +28,15 @@ function createEle(tagName: string, template: string) {
   return ele;
 }
 
-function innerTeamplate(teamplate: string) {
+function innerTemplate(template: string) {
   const self: HTMLElement = this;
-  self.innerHTML = teamplate;
+  self.innerHTML = template;
   return self.children[0] as HTMLElement;
 }
 
 export const methods: IMethods = {
-  createTeamplate,
+  createTemplate,
   appendChildren,
   createEle,
-  innerTeamplate,
+  innerTemplate,
 };

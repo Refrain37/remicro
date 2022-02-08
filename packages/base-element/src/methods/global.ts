@@ -4,11 +4,11 @@ export function register(name: string, instance) {
   }
 }
 
-export function createTeamplate(
-  getTeamplate: (props?: any) => string
+export function createTemplate(
+  getTemplate: (props?: any) => string
 ): (obj, props?: any) => string {
   const fn: (obj, props?: any) => string = (obj, props = {}) => {
-    return getTeamplate.call(obj, props);
+    return getTemplate.call(obj, props);
   };
   return fn;
 }

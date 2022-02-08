@@ -1,6 +1,6 @@
-import { createTeamplate } from '@remicro.js/base-element';
+import { createTemplate } from '@remicro.js/base-element';
 
-export default createTeamplate(function () {
+export default createTemplate(function () {
   const content = `<span>${
     this.loading == 'true'
       ? '<rm-loading class="loading" color="#fff"></rm-loading>'

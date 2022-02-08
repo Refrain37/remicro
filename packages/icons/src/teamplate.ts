@@ -1,6 +1,6 @@
-import { createTeamplate } from '@remicro.js/base-element';
+import { createTemplate } from '@remicro.js/base-element';
 
-export default createTeamplate(function () {
+export default createTemplate(function () {
   let styles = '';
   if (this.styles) {
     styles = `style="${this.styles}"`;

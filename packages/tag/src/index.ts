@@ -1,6 +1,6 @@
 import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
-import getTeamplate from './teamplate';
+import getTemplate from './template';
 import { defineIcons } from '@remicro.js/icons';
 defineIcons();
 
@@ -58,8 +58,8 @@ export default class RmTag extends BaseElement {
   }
 
   render() {
-    const teamplate = getTeamplate(this);
-    this.innerTeamplate(teamplate);
+    const template = getTemplate(this);
+    this.innerTemplate(template);
     this.setColor();
   }
 

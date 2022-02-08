@@ -1,6 +1,6 @@
 import BaseElement, { register } from '@remicro.js/base-element';
 import './index.less';
-import getTeamplate from './teamplate';
+import getTemplate from './template';
 import { defineLoading } from '@remicro.js/loading';
 defineLoading();
 
@@ -14,8 +14,8 @@ export default class RmButton extends BaseElement {
   }
 
   render() {
-    const teamplate = getTeamplate(this);
-    this.btn = this.innerTeamplate(teamplate);
+    const template = getTemplate(this);
+    this.btn = this.innerTemplate(template);
     this.btn.addEventListener('click', e => {
       this.handleClick(e);
     });

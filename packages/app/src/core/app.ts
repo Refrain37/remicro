@@ -72,7 +72,7 @@ export class App implements IApp {
     // load html
     const htmlStr = await loadHtml(this.url);
     const formattedHtmlStr = await formateHtmlStr(htmlStr);
-    const appDom = document.createElement('teamplate');
+    const appDom = document.createElement('div');
     appDom.innerHTML = formattedHtmlStr;
     this.source.domSource = appDom;
     // load static
