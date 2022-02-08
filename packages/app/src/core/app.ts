@@ -8,6 +8,7 @@ import {
 } from './handles/index';
 import SandBox, { ISandBox } from './sandbox';
 import RMApp from '..';
+import { CommCenterForApp, eventCenter } from '.';
 
 export const appCache = new Map<string, IApp>();
 
@@ -42,6 +43,7 @@ export interface IApp {
   mountCount: number;
   status: STATUS;
   source: ISource;
+  commCenterForApp: CommCenterForApp;
   sandbox: ISandBox;
   mount: () => void;
   destroy: () => void;
@@ -54,6 +56,7 @@ export class App implements IApp {
   mountCount: number;
   status: STATUS = STATUS.CREATED;
   source: ISource;
+  commCenterForApp: CommCenterForApp;
   sandbox: ISandBox;
 
   constructor(config: IConfig) {
@@ -68,6 +71,7 @@ export class App implements IApp {
       links: new Map<string, ISourceItem>(),
       scripts: new Map<string, ISourceItem>(),
     };
+    this.commCenterForApp = new CommCenterForApp(eventCenter, this);
     this.sandbox = new SandBox(this.name);
     this.load();
   }
@@ -105,8 +109,6 @@ export class App implements IApp {
   }
 
   mount() {
-    this.mountCount += 1;
-    this.status = STATUS.MOUNTED;
     const cloneDomSource = this.source.domSource.cloneNode(true);
     const fragment = document.createDocumentFragment();
     Array.from(cloneDomSource.childNodes).forEach(node => {
@@ -118,7 +120,11 @@ export class App implements IApp {
     this.sandbox?.start();
     // run scripts
     runScipts(this);
+
+    this.mountCount += 1;
+    this.status = STATUS.MOUNTED;
   }
+
   destroy() {
     this.sandbox?.stop();
     this.status = STATUS.DESTROYED;

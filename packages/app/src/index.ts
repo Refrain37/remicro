@@ -1,8 +1,19 @@
 import BaseElement, { IChanged, register } from '@remicro.js/base-element';
-import { appCache, createApp, IApp, setGlobalEnv } from './core';
+import {
+  appCache,
+  createApp,
+  IApp,
+  setGlobalEnv,
+  eventCenter,
+  overrideSetAttribute,
+  CommCenterForBase,
+} from './core';
 import './index.less';
 
 const props = ['name', 'url', 'open-shadow', 'is-cache', 'global-static'];
+
+const commCenterForBase = new CommCenterForBase(eventCenter);
+overrideSetAttribute(commCenterForBase);
 
 export default class RMApp extends BaseElement {
   static props = props;
