@@ -71,8 +71,8 @@ export class App implements IApp {
       links: new Map<string, ISourceItem>(),
       scripts: new Map<string, ISourceItem>(),
     };
-    this.commCenterForApp = new CommCenterForApp(eventCenter, this);
-    this.sandbox = new SandBox(this.name);
+    this.commCenterForApp = new CommCenterForApp(eventCenter, this); // communication center
+    this.sandbox = new SandBox(this.name, this.commCenterForApp);
     this.load();
   }
 

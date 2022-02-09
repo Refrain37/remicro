@@ -1,3 +1,4 @@
+import { CommCenterForApp } from '..';
 import { proxyWindowEvent } from './windowEvent';
 
 /**
@@ -6,10 +7,14 @@ import { proxyWindowEvent } from './windowEvent';
  * 修改js的作用域：将子应用的window指向代理后的window对象，来进行window对象的隔离
  * 重写window对象：主要在事件相关的函数上进行重写
  */
+
+interface IAppWindow {
+  commCenter: CommCenterForApp;
+}
 export interface ISandBox {
   name: string;
   isActive: boolean; // 是否在运行
-  appWindow: object; // 子应用的window
+  appWindow: IAppWindow; // 子应用的window
   appProxyWindow: object; // 经过代理后的子应用的window
   injectedProps: Set<string | symbol>; // 代理的属性
   bindScope: (code: string) => string; // 修改js作用域
@@ -21,22 +26,24 @@ export interface ISandBox {
 export default class SandBox implements ISandBox {
   name: string;
   isActive: boolean;
-  appWindow: object;
+  appWindow: IAppWindow;
   appProxyWindow: object;
   injectedProps: Set<string | symbol>;
   clearEventCache: () => void;
 
-  constructor(name: string) {
+  constructor(name: string, commCenterForApp: CommCenterForApp) {
     this.name = name;
     this.isActive = false;
-    this.appWindow = {};
+    this.appWindow = {
+      commCenter: commCenterForApp,
+    };
     this.appProxyWindow = null;
     this.injectedProps = new Set<string | symbol>();
     // set proxy
     this.setProxy();
   }
 
-  setProxy() {
+  private setProxy() {
     const _self = this;
     // proxy window event-func
     this.clearEventCache = proxyWindowEvent(this.appWindow);
@@ -85,6 +92,13 @@ export default class SandBox implements ISandBox {
     });
   }
 
+  /**
+   * 绑定js作用域
+   *
+   * @param {string} code
+   * @return {*}
+   * @memberof SandBox
+   */
   bindScope(code: string) {
     const win: any = window;
     win.proxyWindow = this.appProxyWindow;
@@ -106,6 +120,7 @@ export default class SandBox implements ISandBox {
       });
       this.injectedProps.clear();
       this.clearEventCache();
+      this.appWindow.commCenter.clearDataListeners();
     }
   }
 }

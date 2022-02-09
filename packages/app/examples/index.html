@@ -18,8 +18,21 @@
 </head>
 
 <body>
-    <rm-app name="foo" url="http://127.0.0.1:3000"></rm-app>
+    <rm-app id="app" name="foo" url="http://127.0.0.1:3000"></rm-app>
     <script type="module" src="../dist/index.esm.js"></script>
+    <script>
+        const app = document.getElementById('app')
+        app.addEventListener('dataChanged', (e) => {
+            console.log('data changed', e);
+        })
+        setTimeout(() => {
+            app.setAttribute('data', {
+                foo: 'bar',
+                test: '123'
+            })
+
+        }, 1000);
+    </script>
 </body>
 
 </html>
