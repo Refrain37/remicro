@@ -1,6 +1,6 @@
 import RMApp from '../../index';
 import { createEvent } from '@remicro.js/utils';
-import { formatName } from '.';
+import { formatName } from './utils';
 import { App } from '..';
 import { EventCenter, cbk } from './EventCenter';
 

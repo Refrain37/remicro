@@ -77,24 +77,24 @@ const rollupConfig = [{
             json(),
         ],
     },
-    {
-        input: concat('src/index.ts'),
-        output: {
-            file: concat('dist/index.umd.js'),
-            format: 'umd',
-            exports: 'named',
-            name: 'rm' + name,
-            sourcemap: !isProduction,
-        },
-        plugins: [
-            resolve({ extensions }),
-            postcss(postcssConfig),
-            ts(),
-            babel(babelConfig),
-            commonjs(),
-            json(),
-        ],
-    },
+    // {
+    //     input: concat('src/index.ts'),
+    //     output: {
+    //         file: concat('dist/index.umd.js'),
+    //         format: 'umd',
+    //         exports: 'named',
+    //         name: 'rm' + name,
+    //         sourcemap: !isProduction,
+    //     },
+    //     plugins: [
+    //         resolve({ extensions }),
+    //         postcss(postcssConfig),
+    //         ts(),
+    //         babel(babelConfig),
+    //         commonjs(),
+    //         json(),
+    //     ],
+    // },
     {
         input: concat('src/index.ts'),
         output: {

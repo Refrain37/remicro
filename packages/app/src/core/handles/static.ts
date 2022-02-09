@@ -1,6 +1,5 @@
-import { scopeStyleEle } from '.';
 import { ISource } from '..';
-import { getLink } from './links';
+import { getLink, scopeStyleEle } from './links';
 import { getScript } from './scripts';
 
 export async function getStatic(source: ISource, appName: string) {

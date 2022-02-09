@@ -8,7 +8,7 @@ import {
 } from './handles/index';
 import SandBox, { ISandBox } from './sandbox';
 import RMApp from '..';
-import { CommCenterForApp, eventCenter } from '.';
+import { CommCenterForApp, eventCenter } from './comm/index';
 
 export const appCache = new Map<string, IApp>();
 

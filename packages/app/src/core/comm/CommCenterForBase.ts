@@ -1,4 +1,4 @@
-import { formatName } from '.';
+import { formatName } from './utils';
 import { EventCenter } from './EventCenter';
 
 interface ICommCenterForBase {
