@@ -20,7 +20,7 @@ interface IConfig {
 
 export enum STATUS {
   CREATED = 'created',
-  LOADIND = 'loading',
+  LOADED = 'loaded',
   MOUNTED = 'mounted',
   DESTROYED = 'destroyed',
 }
@@ -36,7 +36,14 @@ export interface ISource {
   scripts: Map<string, ISourceItem>;
 }
 
-export interface IApp {
+interface ILifeCycleHook {
+  init: () => void;
+  load: () => void;
+  mount: () => void;
+  destroy: () => void;
+}
+
+export interface IApp extends ILifeCycleHook {
   name: string;
   url: string;
   container: RMApp;
@@ -45,8 +52,6 @@ export interface IApp {
   source: ISource;
   commCenterForApp: CommCenterForApp;
   sandbox: ISandBox;
-  mount: () => void;
-  destroy: () => void;
 }
 
 export class App implements IApp {
@@ -54,7 +59,7 @@ export class App implements IApp {
   url: string;
   container: RMApp;
   mountCount: number;
-  status: STATUS = STATUS.CREATED;
+  status: STATUS;
   source: ISource;
   commCenterForApp: CommCenterForApp;
   sandbox: ISandBox;
@@ -65,15 +70,20 @@ export class App implements IApp {
     this.url = url;
     this.container = container;
     this.mountCount = 0;
-    this.status = STATUS.LOADIND;
     this.source = {
       domSource: null,
       links: new Map<string, ISourceItem>(),
       scripts: new Map<string, ISourceItem>(),
     };
+    this.init();
+    this.load();
+  }
+
+  /* create sandbox and communication center */
+  init() {
     this.commCenterForApp = new CommCenterForApp(eventCenter, this); // communication center
     this.sandbox = new SandBox(this.name, this.commCenterForApp);
-    this.load();
+    this.status = STATUS.CREATED;
   }
 
   /* load source */
@@ -95,9 +105,11 @@ export class App implements IApp {
       styleEles.forEach(e => {
         scopeStyleEle(e, this.name);
       });
+      this.status = STATUS.LOADED;
     }
     if (this.source.scripts.size) {
       await loadScripts(this);
+      this.status = STATUS.LOADED;
     }
     /* load end */
 
@@ -128,7 +140,6 @@ export class App implements IApp {
   destroy() {
     this.sandbox?.stop();
     this.status = STATUS.DESTROYED;
-    console.log('unmount');
   }
 }
 
