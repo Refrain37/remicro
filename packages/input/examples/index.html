@@ -22,7 +22,13 @@
 </head>
 
 <body>
-    <rm-input class="main-input" type="password" id="input" value="test" size="" show-del></rm-input>
+    <rm-input class="main-input" value="foo"></rm-input>
+    <rm-input class="main-input mt10" value="" placeholder="plz enter value"></rm-input>
+    <rm-input class="main-input mt10" value="foo" show-del></rm-input>
+    <rm-input class="main-input mt10" value="foo" size="small"></rm-input>
+    <rm-input class="main-input mt10" value="foo" size="bigger"></rm-input>
+    <rm-input class="main-input mt10" type="password" value="passwd"></rm-input>
+    <rm-input class="main-input mt10" type="password" value="passwd" size="bigger"></rm-input>
     <script type="module" src="../dist/index.esm.js"></script>
     <script>
         const input = document.getElementById('input')
