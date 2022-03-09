@@ -1,6 +1,7 @@
 const path = require('path');
 const execa = require('execa');
 const utils = require('./utils');
+const { priority } = require('./config');
 
 const env = utils.getArg('env') || 'development';
 const package = utils.getArg('name') || '';
@@ -11,6 +12,9 @@ async function start() {
     if (package) {
         await build(package);
     } else {
+        await Promise.all(priority.map(p => build(p, false)));
+        await build('loading', false);
+        await build('button', false);
         await buildAll();
     }
 }
@@ -20,7 +24,7 @@ async function buildAll() {
     await utils.runParallel(require('os').cpus().length, packages, build);
 }
 
-async function build(package) {
+async function build(package, watch = true) {
     const pkgDir = path.resolve(`packages/${package}`);
     const pkg = require(`${pkgDir}/package.json`);
 
@@ -28,10 +32,12 @@ async function build(package) {
         return false;
     }
 
+    const model = watch ? '-wc' : '-c';
+
     // execute rollup -wc
     await execa(
         'rollup', [
-            '-wc',
+            model,
             `${path.resolve('rollup.config.dev.js')}`,
             '--environment', [`NODE_ENV:${env}`, `pkgName:${package}`].filter(Boolean).join(','),
         ], { stdio: 'inherit' }

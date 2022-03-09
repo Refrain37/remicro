@@ -1,4 +1,4 @@
-const priority = ['utils', 'base-element', 'icons', 'loading'];
+const priority = ['utils', 'styles', 'base-element', 'icons'];
 
 module.exports = {
     priority,

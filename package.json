@@ -8,11 +8,11 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "dev": "node scripts/dev.js",
+        "dev": "npm run clean && node scripts/dev.js",
         "dev:r": "npm run clean && node scripts/build.js env=development",
         "build": "npm run clean && node scripts/build.js env=production",
         "clean": "node scripts/clean.js",
-        "publish": "npm run clean && node scripts/build.js env=production && lerna publish",
+        "publish": "npm run build && lerna publish",
         "link": "lerna clean -y && lerna bootstrap && lerna link"
     },
     "author": "refrain",

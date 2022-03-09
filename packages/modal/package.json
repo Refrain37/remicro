@@ -31,6 +31,8 @@
     },
     "dependencies": {
         "@remicro.js/base-element": "^0.0.12",
-        "@remicro.js/utils": "^0.0.12"
+        "@remicro.js/utils": "^0.0.12",
+        "@remicro.js/button": "^0.0.12",
+        "@remicro.js/icons": "^0.0.12"
     }
 }
