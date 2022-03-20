@@ -4,6 +4,7 @@ export interface IMethods {
   createEle: (tagName: string, template: string) => HTMLElement;
   innerTemplate: (template: string) => HTMLElement;
   getSlotTextContent: (key: string) => string;
+  getProps: (propsKeys: string[]) => any;
 }
 
 function createTemplate(html: string, css: string) {
@@ -49,10 +50,29 @@ function getSlotTextContent(key: string) {
   return target;
 }
 
+function getProps(propsKeys: string[]) {
+  const self = this;
+  const props = {};
+
+  propsKeys.forEach(k => {
+    const val = self?.[k] || self.getAttribute(k) || '';
+    val && (props[k] = val);
+  });
+
+  if (self.rmId) {
+    Object.assign(props, {
+      rmId: self.rmId,
+    });
+  }
+
+  return props;
+}
+
 export const methods: IMethods = {
   createTemplate,
   appendChildren,
   createEle,
   innerTemplate,
   getSlotTextContent,
+  getProps,
 };

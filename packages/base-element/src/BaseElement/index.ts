@@ -37,6 +37,7 @@ export default class BaseElement
   createEle = methods.createEle;
   innerTemplate = methods.innerTemplate;
   getSlotTextContent = methods.getSlotTextContent;
+  getProps = methods.getProps;
 
   /* origin life-cycle */
   connectedCallback() {

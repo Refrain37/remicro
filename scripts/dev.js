@@ -12,15 +12,15 @@ async function start() {
     if (package) {
         await build(package);
     } else {
-        await Promise.all(priority.map(p => build(p, false)));
-        await build('loading', false);
-        await build('button', false);
+        for (const p of priority) {
+            await build(p, false);
+        }
         await buildAll();
     }
 }
 
 async function buildAll() {
-    const packages = utils.getPackages();
+    const packages = utils.getPackages().filter(p => p !== 'remicro.js');
     await utils.runParallel(require('os').cpus().length, packages, build);
 }
 
