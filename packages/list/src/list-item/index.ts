@@ -13,12 +13,13 @@ export interface IProps {
   type?: TYPES;
   title?: string;
   avatar?: string;
+  cover?: string;
   desc?: string;
   content: string;
   operations?: string;
 }
 
-const props = ['type', 'title', 'avatar', 'desc', 'content'];
+const props = ['type', 'title', 'avatar', 'cover', 'desc', 'content'];
 
 export default class RmListItem extends BaseElement {
   static props = props;
@@ -30,18 +31,13 @@ export default class RmListItem extends BaseElement {
   }
 
   render() {
-    const propsValList = this.getProps(props);
-    // TODO:add callback
-    const data = this.getInnerContent();
-    Object.assign(propsValList, data);
-
+    const propsValList = this.getProps(props, this.getInnerContent);
     const template = createTemplate(propsValList);
     this.innerTemplate(template);
   }
 
-  getInnerContent() {
+  getInnerContent(data) {
     const type = this.type;
-    const data: any = {};
 
     switch (type) {
       case TYPES.TEXT:
@@ -53,6 +49,7 @@ export default class RmListItem extends BaseElement {
         break;
 
       case TYPES.OPERATIONS:
+      case TYPES.CARD:
         {
           const rootEle = document.createElement('div');
           rootEle.innerHTML = this.innerContent;
@@ -73,7 +70,11 @@ export default class RmListItem extends BaseElement {
 
   /* props */
   get type() {
-    return this.getAttribute('type') || TYPES.TEXT;
+    let type = this.getAttribute('type');
+    if (!(<any>Object).values(TYPES).includes(type)) {
+      type = TYPES.TEXT;
+    }
+    return type;
   }
 
   get title() {

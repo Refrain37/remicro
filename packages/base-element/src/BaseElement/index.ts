@@ -16,7 +16,7 @@ interface IOriginLifeCycle {
 
 interface ILifeCycle {
   init?: () => any;
-  render?: () => any;
+  render?: (changed?: IChanged) => any;
   update?: (changed?: IChanged) => any;
   destroy?: () => any;
 }
@@ -55,7 +55,7 @@ export default class BaseElement
       newVal: args[2],
     };
     this.update(changed);
-    this.render();
+    this.render(changed);
   }
 
   static get observedAttributes() {
@@ -64,7 +64,7 @@ export default class BaseElement
 
   /* life-cycle */
   init() {}
-  render() {}
+  render(changed?: IChanged) {}
   update(changed: IChanged) {}
   destroy() {}
 }

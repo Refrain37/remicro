@@ -4,7 +4,7 @@ export interface IMethods {
   createEle: (tagName: string, template: string) => HTMLElement;
   innerTemplate: (template: string) => HTMLElement;
   getSlotTextContent: (key: string) => string;
-  getProps: (propsKeys: string[]) => any;
+  getProps: <T = any>(propsKeys: string[], cbk?: (props: T) => T) => T;
 }
 
 function createTemplate(html: string, css: string) {
@@ -50,9 +50,9 @@ function getSlotTextContent(key: string) {
   return target;
 }
 
-function getProps(propsKeys: string[]) {
+function getProps<T = any>(propsKeys: string[], cbk?: (props: T) => T): T {
   const self = this;
-  const props = {};
+  let props: T = {} as T;
 
   propsKeys.forEach(k => {
     const val = self?.[k] || self.getAttribute(k) || '';
@@ -63,6 +63,10 @@ function getProps(propsKeys: string[]) {
     Object.assign(props, {
       rmId: self.rmId,
     });
+  }
+
+  if (cbk) {
+    props = cbk(props);
   }
 
   return props;
