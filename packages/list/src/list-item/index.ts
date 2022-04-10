@@ -59,7 +59,7 @@ export default class RmListItem extends BaseElement {
             'operations'
           );
           if (operationsSlot) {
-            data.operations = operationsSlot;
+            data.operations = operationsSlot || '';
           }
         }
         break;

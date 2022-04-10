@@ -22,7 +22,7 @@ export default createTemplate(function () {
   }
 
   const template = `
-    <div class="${this.rmId} list-${this.size} list-container flex-column align-items-center">
+    <div id="${this.rmId}" class="list-${this.size} list-container flex-column align-items-center">
       ${header}
       ${body}
       ${footer}

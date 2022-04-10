@@ -25,6 +25,10 @@
         "@remicro.js/icons": "^0.0.12",
         "@remicro.js/input": "^0.0.12",
         "@remicro.js/loading": "^0.0.12",
-        "@remicro.js/utils": "^0.0.12"
+        "@remicro.js/utils": "^0.0.12",
+        "@remicro.js/app": "^0.0.12",
+        "@remicro.js/list": "^0.0.12",
+        "@remicro.js/modal": "^0.0.12",
+        "@remicro.js/tag": "^0.0.12"
     }
 }

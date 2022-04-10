@@ -52,5 +52,3 @@ export default class RmIcon extends BaseElement {
 export function defineIcons() {
   register('rm-icon', RmIcon);
 }
-
-defineIcons();

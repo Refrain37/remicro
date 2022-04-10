@@ -87,5 +87,3 @@ export default class RMApp extends BaseElement {
 export function defineApp() {
   register('rm-app', RMApp);
 }
-
-defineApp();

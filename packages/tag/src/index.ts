@@ -81,5 +81,3 @@ export default class RmTag extends BaseElement {
 export function defineTag() {
   register('rm-tag', RmTag);
 }
-
-defineTag();

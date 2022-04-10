@@ -105,4 +105,6 @@ export default class RmInput extends BaseElement {
   }
 }
 
-register('rm-input', RmInput);
+export function defineInput() {
+  register('rm-input', RmInput);
+}

@@ -66,7 +66,7 @@ function getProps<T = any>(propsKeys: string[], cbk?: (props: T) => T): T {
   }
 
   if (cbk) {
-    props = cbk(props);
+    props = cbk.call(self, props);
   }
 
   return props;

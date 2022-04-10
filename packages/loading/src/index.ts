@@ -47,5 +47,3 @@ export default class RmLoading extends BaseElement {
 export function defineLoading() {
   register('rm-loading', RmLoading);
 }
-
-defineLoading();

@@ -10,17 +10,89 @@
         body {
             height: 100vh;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
             justify-content: center;
+        }
+        
+        .content {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        .content .content1 {
+            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
         }
     </style>
 </head>
 
 <body>
-    <rm-list>
+    <div class="content">
 
-    </rm-list>
+        <rm-list type="card" style="width: 700px;">
+            <rm-list-item avatar="https://joeschmoe.io/api/v1/random" cover="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" title="TITLE1" desc="this is a desc about myself,i love coding" content="this is a text,card is a type of this list item">
+                <div slot="operations">
+                    <a class="color-primary">Star</a>
+                    <a class="color-primary ml10">Link</a>
+                </div>
+            </rm-list-item>
+            <rm-list-item avatar="https://joeschmoe.io/api/v1/random" cover="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" title="TITLE1" desc="this is a desc about myself,i love coding" content="this is a text,card is a type of this list item">
+                <div slot="operations">
+                    <a class="color-primary">Star</a>
+                    <a class="color-primary ml10">Link</a>
+                </div>
+            </rm-list-item>
+            <rm-list-item avatar="https://joeschmoe.io/api/v1/random" cover="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" title="TITLE1" desc="this is a desc about myself,i love coding" content="this is a text,card is a type of this list item">
+                <div slot="operations">
+                    <a class="color-primary">Star</a>
+                    <a class="color-primary ml10">Link</a>
+                </div>
+            </rm-list-item>
+        </rm-list>
+
+        <div class="content1">
+            <rm-list type="text" style="width: 400px;">
+                <div slot="header">
+                    <h3>header</h3>
+                </div>
+                <div slot="body">
+                    <rm-list-item content="this is a text1"></rm-list-item>
+                    <rm-list-item content="this is a text2"></rm-list-item>
+                    <rm-list-item content="this is a text3"></rm-list-item>
+                    <rm-list-item content="this is a text4"></rm-list-item>
+                </div>
+                <div slot="footer">
+                    <h3>footer</h3>
+                </div>
+            </rm-list>
+
+            <rm-list type="operations" style="width: 700px; margin-top: 20px;">
+                <rm-list-item avatar="https://joeschmoe.io/api/v1/random" title="TITLE1" desc="this is a desc about myself,i love coding" content="this is a text,operations is a type of this list item">
+                    <div slot="operations">
+                        <a class="color-primary">Star</a>
+                        <a class="color-primary ml10">Link</a>
+                    </div>
+                </rm-list-item>
+                <rm-list-item avatar="https://joeschmoe.io/api/v1/random" title="TITLE1" desc="this is a desc about myself,i love coding" content="this is a text,operations is a type of this list item">
+                    <div slot="operations">
+                        <a class="color-primary">Star</a>
+                        <a class="color-primary ml10">Link</a>
+                    </div>
+                </rm-list-item>
+                <rm-list-item avatar="https://joeschmoe.io/api/v1/random" title="TITLE1" desc="this is a desc about myself,i love coding" content="this is a text,operations is a type of this list item">
+                    <div slot="operations">
+                        <a class="color-primary">Star</a>
+                        <a class="color-primary ml10">Link</a>
+                    </div>
+                </rm-list-item>
+            </rm-list>
+        </div>
+
+    </div>
     <script type="module" src="../dist/index.esm.js">
     </script>
     <script>

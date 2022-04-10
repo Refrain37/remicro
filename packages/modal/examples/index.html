@@ -18,8 +18,13 @@
 </head>
 
 <body>
-    <p>daasfasfasfsaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-    <rm-modal visible="true"></rm-modal>
+    <p>这是一个页面</p>
+    <rm-modal title="确认以下信息" visible="true" cancel-text="退出cancel" closable="false">
+        <div slot="content">
+            <div>这是一段文本</div>
+            <p>this is text</p>
+        </div>
+    </rm-modal>
     <script type="module" src="../dist/index.esm.js">
     </script>
     <script>

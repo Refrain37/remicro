@@ -53,9 +53,11 @@ const bodyGenerator = {
         </div>`
       : '';
     const Title = title ? `<div class="bold">${title}</div>` : '';
-    const Desc = desc ? `<div class="mt5 color-9">${desc}</div>` : '';
+    const Desc = desc ? `<div class="color-9">${desc}</div>` : '';
     const Content = content ? `<div class="mt20">${content}</div>` : '';
-    const Operations = title ? `<div class="mt20">${operations}</div>` : '';
+    const Operations = operations
+      ? `<div class="mt20">${operations}</div>`
+      : '';
 
     const Cover = cover
       ? `<div class="cover ml40">

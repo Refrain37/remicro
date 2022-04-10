@@ -7,12 +7,12 @@ defineButton();
 
 const props = [
   'visible',
-  'height',
+  'width',
   'mask',
   'closable',
   'title',
-  'confirmText',
-  'cancelText',
+  'confirm-text',
+  'cancel-text',
 ];
 
 export default class RmModal extends BaseElement {
@@ -108,15 +108,13 @@ export default class RmModal extends BaseElement {
     return this.getAttribute('title') || 'Title';
   }
   get confirmText() {
-    return this.getAttribute('confirmText') || '确认';
+    return this.getAttribute('confirm-text') || '确认';
   }
   get cancelText() {
-    return this.getAttribute('cancelText') || '取消';
+    return this.getAttribute('cancel-text') || '取消';
   }
 }
 
 export function defineModal() {
   register('rm-modal', RmModal);
 }
-
-defineModal();

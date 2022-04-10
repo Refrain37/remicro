@@ -31,7 +31,7 @@ const getInnerEle = (ele: HTMLElement) => {
     footer: '',
   };
 
-  ele.children &&
+  ele?.children &&
     Array.from(ele.children).forEach((e: HTMLElement) => {
       if (e.hasAttribute('slot')) {
         onlyBody = false;
@@ -65,7 +65,7 @@ export default class RmList extends BaseElement {
 
   render(changed?: IChanged) {
     this.setStyles();
-    if (changed.attrName === 'type') {
+    if (changed?.attrName === 'type') {
       this.setItemType();
     }
 
@@ -94,7 +94,7 @@ export default class RmList extends BaseElement {
   }
 
   setStyles() {
-    const styleEle = document.getElementById(this.rmId);
+    const styleEle = document.getElementById(this.rmId + '-style');
     if (styleEle && styleEle.tagName.toLocaleLowerCase() === 'style') {
       return;
     }
@@ -110,7 +110,7 @@ export default class RmList extends BaseElement {
         }
       `;
       const styleEle = document.createElement('style');
-      styleEle.setAttribute('id', this.rmId);
+      styleEle.setAttribute('id', this.rmId + '-style');
       styleEle.innerHTML = styles;
       document.body.append(styleEle);
     }
@@ -142,5 +142,3 @@ export function defineList() {
   register('rm-list', RmList);
   defineListItem();
 }
-
-defineList();
