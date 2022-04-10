@@ -22,21 +22,25 @@ export default class RMApp extends BaseElement {
 
   constructor() {
     super();
-    this.setWebackEnv(); // set env while webpack and not use global static
+    this.setWebpackEnv(); // set env while webpack and not use global static
   }
 
   /* methods */
-  setWebackEnv() {
+  setWebpackEnv() {
     if (this.envSet) {
       return;
     }
-    this.envSet = true;
     let url = this.url || '';
+    console.log(url);
+    if (!url) {
+      return;
+    }
     if (this.url[this.url.length - 1] !== '/') {
       url += '/';
     }
     setGlobalEnv('__RM_APP_ENV__', true);
     setGlobalEnv('__RM_APP_PUBLIC_PATH__', url); // auto-complete path while in webpack
+    this.envSet = true;
   }
 
   // check props
@@ -107,3 +111,5 @@ export default class RMApp extends BaseElement {
 export function defineApp() {
   register('rm-app', RMApp);
 }
+
+defineApp();
