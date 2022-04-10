@@ -1,6 +1,6 @@
 {
     "name": "@remicro.js/button",
-    "version": "0.1.0",
+    "version": "0.1.4",
     "description": "> TODO: description",
     "author": "许泓杰 <965926581@qq.com>",
     "homepage": "https://github.com/Refrain37/remicro#readme",
@@ -30,7 +30,7 @@
         "typescript": "^4.5.2"
     },
     "dependencies": {
-        "@remicro.js/base-element": "^0.1.0",
-        "@remicro.js/loading": "^0.1.0"
+        "@remicro.js/base-element": "^0.1.4",
+        "@remicro.js/loading": "^0.1.4"
     }
 }
