@@ -45,7 +45,6 @@ export default class RMApp extends BaseElement {
   // check props
   check() {
     if (!this.name || !this.url) {
-      console.log('err:name/url');
       return false;
     }
 
