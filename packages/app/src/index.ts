@@ -18,15 +18,20 @@ overrideSetAttribute(commCenterForBase);
 export default class RMApp extends BaseElement {
   static props = props;
   app: IApp = null;
+  envSet = false;
 
   constructor() {
     super();
-    !this.globalStatic && this.setWebackEnv(); // set env while webpack and not use global static
+    this.setWebackEnv(); // set env while webpack and not use global static
   }
 
   /* methods */
   setWebackEnv() {
-    let url = this.url;
+    if (this.envSet) {
+      return;
+    }
+    this.envSet = true;
+    let url = this.url || '';
     if (this.url[this.url.length - 1] !== '/') {
       url += '/';
     }
@@ -83,19 +88,19 @@ export default class RMApp extends BaseElement {
     return this.getAttribute('open-shadow') === 'true';
   }
   set isOpenShadow(val: any) {
-    this.setAttribute('isOpenShadow', val);
+    this.setAttribute('open-shadow', val);
   }
   get isCache() {
     return this.getAttribute('is-cache') === 'true';
   }
   set isCache(val: any) {
-    this.setAttribute('isCache', val);
+    this.setAttribute('is-cache', val);
   }
   get globalStatic() {
     return this.getAttribute('global-static') !== null;
   }
   set globalStatic(val: any) {
-    this.setAttribute('globalStatic', val);
+    this.setAttribute('global-static', val);
   }
 }
 

@@ -133,14 +133,14 @@ export default class RmModal extends BaseElement {
   }
 
   set confirmText(val: any) {
-    this.setAttribute('confirmText', val);
+    this.setAttribute('confirm-text', val);
   }
   get cancelText() {
     return this.getAttribute('cancel-text') || '取消';
   }
 
   set cancelText(val: any) {
-    this.setAttribute('cancelText', val);
+    this.setAttribute('cancel-text', val);
   }
 }
 

@@ -42,7 +42,7 @@ export default class RmIcon extends BaseElement {
     return this.getAttribute('class-name');
   }
   set className(val: any) {
-    this.setAttribute('class', val);
+    this.setAttribute('class-name', val);
   }
   get styles() {
     return this.getAttribute('styles');

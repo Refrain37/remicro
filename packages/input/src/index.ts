@@ -119,7 +119,7 @@ export default class RmInput extends BaseElement {
     return this.getAttribute('show-del') !== null;
   }
   set showDel(val: any) {
-    this.setAttribute('showDel', val);
+    this.setAttribute('show-del', val);
   }
 }
 

@@ -142,7 +142,7 @@ export default class RmList extends BaseElement {
   }
 
   set emptyText(val: any) {
-    this.setAttribute('emptyText', val);
+    this.setAttribute('empty-text', val);
   }
 
   get bordered() {

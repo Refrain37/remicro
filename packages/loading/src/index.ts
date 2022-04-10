@@ -50,7 +50,7 @@ export default class RmLoading extends BaseElement {
   }
 
   set fontsize(val: any) {
-    this.setAttribute('fontsize', val);
+    this.setAttribute('font-size', val);
   }
   get mask() {
     return this.getAttribute('mask') !== null;
