@@ -22,10 +22,11 @@
 </head>
 
 <body>
-    <rm-btn class="main-btn" type="primary" id="btn" size="bigger"></rm-btn>
+    <rm-btn class="main-btn" id="btn"></rm-btn>
     <script type="module" src="../dist/index.esm.js"></script>
     <script>
         const btn = document.getElementById('btn')
+        btn.setAttribute('content', '测试')
         btn.addEventListener('click', () => {
             console.log('click')
             btn.setAttribute('loading', 'true')
