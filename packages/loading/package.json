@@ -1,6 +1,6 @@
 {
     "name": "@remicro.js/loading",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "> TODO: description",
     "author": "许泓杰 <965926581@qq.com>",
     "homepage": "https://github.com/Refrain37/remicro#readme",
@@ -30,8 +30,8 @@
         "typescript": "^4.5.2"
     },
     "dependencies": {
-        "@remicro.js/base-element": "^0.0.14",
-        "@remicro.js/icons": "^0.0.14",
-        "@remicro.js/utils": "^0.0.14"
+        "@remicro.js/base-element": "^0.0.15",
+        "@remicro.js/icons": "^0.0.15",
+        "@remicro.js/utils": "^0.0.15"
     }
 }

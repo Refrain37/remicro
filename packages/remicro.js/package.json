@@ -1,6 +1,6 @@
 {
     "name": "remicro.js",
-    "version": "0.0.14",
+    "version": "0.0.15",
     "description": "remicro",
     "author": "refrain",
     "homepage": "",
@@ -21,14 +21,14 @@
     },
     "gitHead": "ca09732af7a0d672217b8664302a212662f4e1c1",
     "dependencies": {
-        "@remicro.js/app": "^0.0.14",
-        "@remicro.js/button": "^0.0.14",
-        "@remicro.js/icons": "^0.0.14",
-        "@remicro.js/input": "^0.0.14",
-        "@remicro.js/list": "^0.0.14",
-        "@remicro.js/loading": "^0.0.14",
-        "@remicro.js/modal": "^0.0.14",
-        "@remicro.js/tag": "^0.0.14",
-        "@remicro.js/utils": "^0.0.14"
+        "@remicro.js/app": "^0.0.15",
+        "@remicro.js/button": "^0.0.15",
+        "@remicro.js/icons": "^0.0.15",
+        "@remicro.js/input": "^0.0.15",
+        "@remicro.js/list": "^0.0.15",
+        "@remicro.js/loading": "^0.0.15",
+        "@remicro.js/modal": "^0.0.15",
+        "@remicro.js/tag": "^0.0.15",
+        "@remicro.js/utils": "^0.0.15"
     }
 }
