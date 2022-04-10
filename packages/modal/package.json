@@ -1,6 +1,6 @@
 {
     "name": "@remicro.js/modal",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "description": "> TODO: description",
     "author": "许泓杰 <965926581@qq.com>",
     "homepage": "https://github.com/Refrain37/remicro#readme",
@@ -30,9 +30,9 @@
         "typescript": "^4.5.2"
     },
     "dependencies": {
-        "@remicro.js/base-element": "^0.0.12",
-        "@remicro.js/utils": "^0.0.12",
-        "@remicro.js/button": "^0.0.12",
-        "@remicro.js/icons": "^0.0.12"
+        "@remicro.js/base-element": "^0.0.13",
+        "@remicro.js/button": "^0.0.13",
+        "@remicro.js/icons": "^0.0.13",
+        "@remicro.js/utils": "^0.0.13"
     }
 }
