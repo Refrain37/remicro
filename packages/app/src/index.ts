@@ -70,17 +70,32 @@ export default class RMApp extends BaseElement {
   get name() {
     return this.getAttribute('name');
   }
+  set name(val) {
+    this.setAttribute('name', val);
+  }
   get url() {
     return this.getAttribute('url');
+  }
+  set url(val) {
+    this.setAttribute('url', val);
   }
   get isOpenShadow() {
     return this.getAttribute('open-shadow') === 'true';
   }
+  set isOpenShadow(val: any) {
+    this.setAttribute('isOpenShadow', val);
+  }
   get isCache() {
     return this.getAttribute('is-cache') === 'true';
   }
+  set isCache(val: any) {
+    this.setAttribute('isCache', val);
+  }
   get globalStatic() {
     return this.getAttribute('global-static') !== null;
+  }
+  set globalStatic(val: any) {
+    this.setAttribute('globalStatic', val);
   }
 }
 

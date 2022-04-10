@@ -121,6 +121,10 @@ export default class RmList extends BaseElement {
     return this.getAttribute('size') || 'default';
   }
 
+  set size(val: any) {
+    this.setAttribute('size', val);
+  }
+
   get type() {
     let type = this.getAttribute('type');
     if (!(<any>Object).values(TYPES).includes(type)) {
@@ -129,12 +133,24 @@ export default class RmList extends BaseElement {
     return type;
   }
 
+  set type(val: any) {
+    this.setAttribute('type', val);
+  }
+
   get emptyText() {
     return this.getAttribute('empty-text') || '当前列表暂无数据';
   }
 
+  set emptyText(val: any) {
+    this.setAttribute('emptyText', val);
+  }
+
   get bordered() {
     return this.getAttribute('bordered') !== 'false';
+  }
+
+  set bordered(val: any) {
+    this.setAttribute('bordered', val);
   }
 }
 

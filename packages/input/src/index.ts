@@ -88,20 +88,38 @@ export default class RmInput extends BaseElement {
   get value() {
     return this.getAttribute('value') || '';
   }
+  set value(val: any) {
+    this.setAttribute('value', val);
+  }
   get placeholder() {
     return this.getAttribute('placeholder') || '请输入内容';
+  }
+  set placeholder(val: any) {
+    this.setAttribute('placeholder', val);
   }
   get type() {
     return this.getAttribute('type') || 'text';
   }
+  set type(val: any) {
+    this.setAttribute('type', val);
+  }
   get size() {
     return this.getAttribute('size');
+  }
+  set size(val: any) {
+    this.setAttribute('size', val);
   }
   get disabled() {
     return this.getAttribute('disabled') !== null;
   }
+  set disabled(val: any) {
+    this.setAttribute('disabled', val);
+  }
   get showDel() {
     return this.getAttribute('show-del') !== null;
+  }
+  set showDel(val: any) {
+    this.setAttribute('showDel', val);
   }
 }
 

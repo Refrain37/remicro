@@ -67,14 +67,30 @@ export default class RmTag extends BaseElement {
   get text() {
     return this.getAttribute('text') || '';
   }
+  set text(val: any) {
+    this.setAttribute('text', val);
+  }
+
   get color() {
     return this.getAttribute('color');
+  }
+
+  set color(val: any) {
+    this.setAttribute('color', val);
   }
   get type() {
     return this.getAttribute('type') || '';
   }
+
+  set type(val: any) {
+    this.setAttribute('type', val);
+  }
   get icon() {
     return this.getAttribute('icon') || '';
+  }
+
+  set icon(val: any) {
+    this.setAttribute('icon', val);
   }
 }
 

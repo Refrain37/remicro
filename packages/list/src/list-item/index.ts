@@ -77,20 +77,48 @@ export default class RmListItem extends BaseElement {
     return type;
   }
 
+  set type(val: any) {
+    this.setAttribute('type', val);
+  }
+
   get title() {
     return this.getAttribute('title');
+  }
+
+  set title(val: any) {
+    this.setAttribute('title', val);
   }
 
   get avatar() {
     return this.getAttribute('avatar');
   }
 
+  set avatar(val: any) {
+    this.setAttribute('avatar', val);
+  }
+
+  get cover() {
+    return this.getAttribute('cover');
+  }
+
+  set cover(val: any) {
+    this.setAttribute('cover', val);
+  }
+
   get desc() {
     return this.getAttribute('desc');
   }
 
+  set desc(val: any) {
+    this.setAttribute('desc', val);
+  }
+
   get content() {
     return this.getAttribute('content') || '';
+  }
+
+  set content(val: any) {
+    this.setAttribute('content', val);
   }
 }
 

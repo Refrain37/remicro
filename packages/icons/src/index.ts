@@ -35,17 +35,32 @@ export default class RmIcon extends BaseElement {
   get name() {
     return this.getAttribute('name') || '';
   }
+  set name(val: any) {
+    this.setAttribute('name', val);
+  }
   get className() {
     return this.getAttribute('class-name');
+  }
+  set className(val: any) {
+    this.setAttribute('class', val);
   }
   get styles() {
     return this.getAttribute('styles');
   }
+  set styles(val: any) {
+    this.setAttribute('style', val);
+  }
   get color() {
     return this.getAttribute('color');
   }
+  set color(val: any) {
+    this.setAttribute('color', val);
+  }
   get fontsize() {
     return this.getAttribute('font-size');
+  }
+  set fontsize(val: any) {
+    this.setAttribute('font-size', val);
   }
 }
 

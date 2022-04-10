@@ -33,14 +33,31 @@ export default class RmLoading extends BaseElement {
   get color() {
     return this.getAttribute('color');
   }
+
+  set color(val: any) {
+    this.setAttribute('color', val);
+  }
+
   get text() {
     return this.getAttribute('text') || '';
+  }
+
+  set text(val: any) {
+    this.setAttribute('text', val);
   }
   get fontsize() {
     return this.getAttribute('font-size') || '16';
   }
+
+  set fontsize(val: any) {
+    this.setAttribute('fontsize', val);
+  }
   get mask() {
     return this.getAttribute('mask') !== null;
+  }
+
+  set mask(val: any) {
+    this.setAttribute('mask', val);
   }
 }
 

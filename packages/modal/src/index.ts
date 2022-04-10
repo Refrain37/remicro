@@ -95,23 +95,52 @@ export default class RmModal extends BaseElement {
   get visible() {
     return this.getAttribute('visible') !== 'false';
   }
+
+  set visible(val: any) {
+    this.setAttribute('visible', val);
+  }
+
   get width() {
     return this.getAttribute('width') || '520px';
+  }
+
+  set width(val: any) {
+    this.setAttribute('width', val);
   }
   get mask() {
     return this.getAttribute('mask') || true;
   }
+
+  set mask(val: any) {
+    this.setAttribute('mask', val);
+  }
   get closable() {
     return this.getAttribute('closable') || true;
+  }
+
+  set closable(val: any) {
+    this.setAttribute('closable', val);
   }
   get title() {
     return this.getAttribute('title') || 'Title';
   }
+
+  set title(val: any) {
+    this.setAttribute('title', val);
+  }
   get confirmText() {
     return this.getAttribute('confirm-text') || '确认';
   }
+
+  set confirmText(val: any) {
+    this.setAttribute('confirmText', val);
+  }
   get cancelText() {
     return this.getAttribute('cancel-text') || '取消';
+  }
+
+  set cancelText(val: any) {
+    this.setAttribute('cancelText', val);
   }
 }
 
