@@ -1,6 +1,7 @@
 export * from './validator';
 export * from './event';
 
+/* hash */
 export function createHashStr(len = 10) {
   const strs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890';
   let hashStr = '';
