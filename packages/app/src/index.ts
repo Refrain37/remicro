@@ -22,7 +22,6 @@ export default class RMApp extends BaseElement {
 
   constructor() {
     super();
-    this.setWebpackEnv(); // set env while webpack and not use global static
   }
 
   /* methods */
@@ -30,7 +29,7 @@ export default class RMApp extends BaseElement {
     if (this.envSet) {
       return;
     }
-    let url = this.url || '';
+    let url = this.url;
     console.log(url);
     if (!url) {
       return;
@@ -46,13 +45,16 @@ export default class RMApp extends BaseElement {
   // check props
   check() {
     if (!this.name || !this.url) {
-      throw TypeError('err');
+      console.log('err:name/url');
+      return false;
     }
-    return true;
+
+    return !appCache.has(this.name) && this.app === null;
   }
 
   /* life cycle */
-  async init() {
+  async render() {
+    this.setWebpackEnv(); // set env while webpack and not use global static
     if (this.check()) {
       const app = await createApp({
         name: this.name,
@@ -62,10 +64,6 @@ export default class RMApp extends BaseElement {
       this.app = app;
       appCache.set(this.name, app);
     }
-  }
-
-  update(changed: IChanged): void {
-    // console.log(changed);
   }
 
   destroy() {
@@ -83,7 +81,7 @@ export default class RMApp extends BaseElement {
     this.setAttribute('name', val);
   }
   get url() {
-    return this.getAttribute('url');
+    return this.getAttribute('url') || '';
   }
   set url(val) {
     this.setAttribute('url', val);
@@ -111,5 +109,3 @@ export default class RMApp extends BaseElement {
 export function defineApp() {
   register('rm-app', RMApp);
 }
-
-defineApp();
