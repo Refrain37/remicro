@@ -18,7 +18,7 @@ overrideSetAttribute(commCenterForBase);
 export default class RMApp extends BaseElement {
   static props = props;
   app: IApp = null;
-  envSet = false;
+  private envSet = false;
 
   constructor() {
     super();
@@ -30,7 +30,6 @@ export default class RMApp extends BaseElement {
       return;
     }
     let url = this.url;
-    console.log(url);
     if (!url) {
       return;
     }
@@ -44,11 +43,11 @@ export default class RMApp extends BaseElement {
 
   // check props
   check() {
-    if (!this.name || !this.url) {
-      return false;
+    if (this.name && this.url && !this.app) {
+      return true;
     }
 
-    return !appCache.has(this.name) && this.app === null;
+    return false;
   }
 
   /* life cycle */
@@ -108,3 +107,5 @@ export default class RMApp extends BaseElement {
 export function defineApp() {
   register('rm-app', RMApp);
 }
+
+defineApp();

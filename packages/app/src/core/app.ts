@@ -126,6 +126,7 @@ export class App implements IApp {
     Array.from(cloneDomSource.childNodes).forEach(node => {
       fragment.appendChild(node);
     });
+    this.container.innerHTML = '';
     this.container.appendChild(fragment);
 
     // open sandbox

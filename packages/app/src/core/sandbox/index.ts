@@ -103,7 +103,12 @@ export default class SandBox implements ISandBox {
     const win: any = window;
     win.proxyWindow = this.appProxyWindow;
     // change scope to proxy-window
-    return `;(function(window, self){with(window){;${code}\n}}).call(window.proxyWindow, window.proxyWindow, window.proxyWindow);`;
+    return `
+    ;(function(proxyWindow){
+      with(proxyWindow){
+       (function(window){${code}\n}).call(proxyWindow,proxyWindow)
+      }
+    })(this);`;
   }
 
   start() {
