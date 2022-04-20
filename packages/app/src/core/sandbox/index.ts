@@ -1,4 +1,5 @@
 import { CommCenterForApp } from '..';
+import { overridePrototype, releasePrototype } from './override';
 import { proxyWindowEvent } from './windowEvent';
 
 /**
@@ -24,6 +25,7 @@ export interface ISandBox {
 }
 
 export default class SandBox implements ISandBox {
+  static activeCount = 0;
   name: string;
   isActive: boolean;
   appWindow: IAppWindow;
@@ -114,6 +116,9 @@ export default class SandBox implements ISandBox {
   start() {
     if (this.isActive === false) {
       this.isActive = true;
+      if (++SandBox.activeCount === 1) {
+        overridePrototype();
+      }
     }
   }
 
@@ -126,6 +131,9 @@ export default class SandBox implements ISandBox {
       this.injectedProps.clear();
       this.clearEventCache();
       this.appWindow.commCenter.clearDataListeners();
+      if (--SandBox.activeCount === 0) {
+        releasePrototype();
+      }
     }
   }
 }
