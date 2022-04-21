@@ -8,13 +8,13 @@ import {
   overrideSetAttribute,
   CommCenterForBase,
 } from './core';
-import { getPrototypeMethods } from './core/global/prototypeMethods';
+import { getRawPrototypeMethods } from './core/global/RawPrototypeMethods';
 import './index.less';
 
 const props = ['name', 'url', 'open-shadow', 'is-cache', 'global-static'];
 
 const commCenterForBase = new CommCenterForBase(eventCenter);
-getPrototypeMethods();
+getRawPrototypeMethods();
 overrideSetAttribute(commCenterForBase);
 
 export default class RMApp extends BaseElement {

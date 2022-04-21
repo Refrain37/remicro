@@ -1,8 +1,8 @@
 import { isBrowser } from '../utils';
 
-const prototypeMethods: Record<string, any> = {};
+const RawPrototypeMethods: Record<string, any> = {};
 
-export function getPrototypeMethods() {
+export function getRawPrototypeMethods() {
   const win: any = window || {};
   if (isBrowser() === true && !win.__RM_prototype) {
     win.__RM_prototype = true;
@@ -43,7 +43,7 @@ export function getPrototypeMethods() {
     const rawDocumentAddEventListener = rawDocument.addEventListener;
     const rawDocumentRemoveEventListener = rawDocument.removeEventListener;
 
-    Object.assign(prototypeMethods, {
+    Object.assign(RawPrototypeMethods, {
       rawWindow,
       rawDocument,
       rawSetAttribute,
@@ -75,4 +75,4 @@ export function getPrototypeMethods() {
   }
 }
 
-export default prototypeMethods;
+export default RawPrototypeMethods;

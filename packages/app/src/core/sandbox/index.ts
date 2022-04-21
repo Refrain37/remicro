@@ -1,5 +1,7 @@
 import { CommCenterForApp } from '..';
-import { overridePrototype, releasePrototype } from './override';
+import { RawPrototypeMethods } from '../global';
+import { asyncSetCurrAppName } from '../utils';
+import { overridePrototypeMethods, releasePrototypeMethods } from './override';
 import { proxyWindowEvent } from './windowEvent';
 
 /**
@@ -9,14 +11,18 @@ import { proxyWindowEvent } from './windowEvent';
  * 重写window对象：主要在事件相关的函数上进行重写
  */
 
-interface IAppWindow {
+export type MicroAppWindowDataType = {
   commCenter: CommCenterForApp;
-}
+  rawWindow: Window;
+  rawDocument: Document;
+};
+
+export type MicroAppWindow = Window & MicroAppWindowDataType;
 export interface ISandBox {
-  name: string;
+  appName: string;
   isActive: boolean; // 是否在运行
-  appWindow: IAppWindow; // 子应用的window
-  appProxyWindow: object; // 经过代理后的子应用的window
+  appWindow: MicroAppWindow; // 子应用的window
+  appProxyWindow: WindowProxy; // 经过代理后的子应用的window
   injectedProps: Set<string | symbol>; // 代理的属性
   bindScope: (code: string) => string; // 修改js作用域
   start: () => void;
@@ -26,40 +32,35 @@ export interface ISandBox {
 
 export default class SandBox implements ISandBox {
   static activeCount = 0;
-  name: string;
+  appName: string;
   isActive: boolean;
-  appWindow: IAppWindow;
-  appProxyWindow: object;
-  injectedProps: Set<string | symbol>;
+  appWindow = {} as MicroAppWindow;
+  appProxyWindow: WindowProxy = null;
+  injectedProps: Set<string | symbol> = new Set<string | symbol>();
   clearEventCache: () => void;
 
-  constructor(name: string, commCenterForApp: CommCenterForApp) {
-    this.name = name;
+  constructor(appName: string, commCenterForApp: CommCenterForApp) {
+    this.appName = appName;
     this.isActive = false;
-    this.appWindow = {
-      commCenter: commCenterForApp,
-    };
-    this.appProxyWindow = null;
-    this.injectedProps = new Set<string | symbol>();
-    // set proxy
-    this.setProxy();
+    this.mixinAppWindow(this.appWindow, commCenterForApp);
+    this.appProxyWindow = this.createProxyWindow();
   }
 
-  private setProxy() {
+  private createProxyWindow() {
+    const appName = this.appName;
+    const rawWindow = RawPrototypeMethods.rawWindow;
     const _self = this;
-    // proxy window event-func
-    this.clearEventCache = proxyWindowEvent(this.appWindow);
 
-    // proxy whole window
-    this.appProxyWindow = new Proxy(this.appWindow, {
+    return new Proxy(this.appWindow, {
       get(target, prop) {
+        asyncSetCurrAppName(appName);
         // 首先从代理对象获取
         if (Reflect.has(target, prop)) {
           return Reflect.get(target, prop);
         }
 
         // 在全局对象重获取
-        const rawVal = Reflect.get(window, prop);
+        const rawVal = Reflect.get(rawWindow, prop);
 
         // 处理函数
         if (typeof rawVal === 'function') {
@@ -94,6 +95,36 @@ export default class SandBox implements ISandBox {
     });
   }
 
+  private mixinAppWindow(
+    appWindow: MicroAppWindow,
+    commCenterForApp: CommCenterForApp
+  ) {
+    // proxy window event-func
+    this.clearEventCache = proxyWindowEvent(appWindow);
+
+    // communication center
+    appWindow.commCenter = commCenterForApp;
+    appWindow.rawWindow = RawPrototypeMethods.rawWindow;
+    appWindow.rawDocument = RawPrototypeMethods.rawDocument;
+
+    // set specialKeys
+    this.setSpecialProperties(appWindow);
+  }
+
+  private setSpecialProperties(appWindow: MicroAppWindow) {
+    const appName = this.appName;
+    Object.defineProperties(appWindow, {
+      document: {
+        get() {
+          asyncSetCurrAppName(appName);
+          return RawPrototypeMethods.rawWindow;
+        },
+        configurable: false,
+        enumerable: true,
+      },
+    });
+  }
+
   /**
    * 绑定js作用域
    *
@@ -117,7 +148,7 @@ export default class SandBox implements ISandBox {
     if (this.isActive === false) {
       this.isActive = true;
       if (++SandBox.activeCount === 1) {
-        overridePrototype();
+        overridePrototypeMethods(); // override prototype methods
       }
     }
   }
@@ -132,7 +163,7 @@ export default class SandBox implements ISandBox {
       this.clearEventCache();
       this.appWindow.commCenter.clearDataListeners();
       if (--SandBox.activeCount === 0) {
-        releasePrototype();
+        releasePrototypeMethods();
       }
     }
   }

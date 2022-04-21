@@ -4,6 +4,7 @@
     <router-link to="/vue3">Vue3</router-link>
   </nav>
   <router-view></router-view>
+  <div class="container">test</div>
 </template>
 
 <style lang="scss">
