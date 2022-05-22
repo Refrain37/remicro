@@ -1,5 +1,4 @@
 <template>
-  <!-- <micro-opts-bar></micro-opts-bar> -->
   <rm-app
     name="child-react"
     url="http://localhost:3001"

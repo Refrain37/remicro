@@ -1,4 +1,17 @@
 <template>
+  <div class="flex-row">
+    <rm-btn
+      type="primary"
+      content="向子应用发起数据"
+      @click="sendMessage()"
+    ></rm-btn>
+    <rm-btn
+      class="ml20"
+      type="primary"
+      content="修改主体色为红色"
+      @click="changeColor()"
+    ></rm-btn>
+  </div>
   <rm-app
     name="child-vue3"
     url="http://localhost:3002"
@@ -14,11 +27,21 @@ import { defineComponent, onMounted, reactive } from 'vue';
 export default defineComponent({
   name: 'childVue3',
   setup() {
-    let info = {};
+    let info = reactive({});
+    const sendMessage = () => {
+      const win: any = window;
+      win.CommCenterForBase.setData('child-vue3', { msg: 'from base' });
+    };
+
     return {
       info,
+      sendMessage,
       handleDataChanged(e: any) {
         console.log('[main]子应用vue3传输的数据', e.detail);
+      },
+      changeColor() {
+        const root = document.documentElement;
+        root.style.setProperty('--color-primary', 'red');
       },
     };
   },

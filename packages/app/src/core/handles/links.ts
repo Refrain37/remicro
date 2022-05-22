@@ -66,6 +66,9 @@ function scopedRules(rules, prefix) {
   let result = '';
   // 遍历rules，处理每一条规则
   for (const rule of rules) {
+    if (rule.selectorText === ':root') {
+      return;
+    }
     switch (rule.type) {
       case 1: // STYLE_RULE
         result += scopedStyleRule(rule, prefix);
