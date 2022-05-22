@@ -43,7 +43,7 @@ export default class CommCenterForApp implements ICommCenterForApp {
    * @memberof CommCenterForApp
    */
   dispatch(data: any) {
-    const event = createEvent('dataChanged', data);
+    const event = createEvent('data-changed', data);
     this.container.dispatchEvent(event);
   }
 }

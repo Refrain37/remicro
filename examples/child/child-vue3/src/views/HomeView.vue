@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <img alt="Vue logo" src="../assets/logo.png" />
+    <HelloWorld msg="子应用 Vue3.2" />
   </div>
 </template>
 
@@ -16,3 +16,5 @@ export default defineComponent({
   },
 });
 </script>
+
+<style></style>

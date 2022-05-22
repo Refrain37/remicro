@@ -1,5 +1,5 @@
 import { formatName } from './utils';
-import { EventCenter } from './EventCenter';
+import eventCenter, { EventCenter } from './EventCenter';
 
 interface ICommCenterForBase {
   eventCenter: EventCenter;
@@ -22,4 +22,14 @@ export default class CommCenterForBase implements ICommCenterForBase {
     appName = formatName(appName);
     this.eventCenter.off(appName);
   }
+}
+
+export async function createCommCenterForBase() {
+  const commCenterForBase = new CommCenterForBase(eventCenter);
+  const win: any = window;
+  if (!win.commCenterForBase) {
+    console.log('init', commCenterForBase);
+    win.commCenterForBase = commCenterForBase;
+  }
+  return commCenterForBase;
 }

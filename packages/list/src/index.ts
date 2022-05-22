@@ -158,3 +158,4 @@ export function defineList() {
   register('rm-list', RmList);
   defineListItem();
 }
+defineList();

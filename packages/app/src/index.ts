@@ -7,18 +7,15 @@ import {
   eventCenter,
   overrideSetAttribute,
   CommCenterForBase,
+  setCommCenter,
 } from './core';
 import { getRawPrototypeMethods } from './core/global/RawPrototypeMethods';
 import './index.less';
 
 const props = ['name', 'url', 'open-shadow', 'is-cache', 'global-static'];
 
-const commCenterForBase = new CommCenterForBase(eventCenter);
-getRawPrototypeMethods();
-overrideSetAttribute(commCenterForBase);
-
 export default class RMApp extends BaseElement {
-  static props = props;
+  // static props = props;
   app: IApp = null;
   private envSet = false;
 
@@ -53,9 +50,14 @@ export default class RMApp extends BaseElement {
   }
 
   /* life cycle */
-  async render() {
+  async init() {
     this.setWebpackEnv(); // set env while webpack and not use global static
     if (this.check()) {
+      if (appCache.has(this.name)) {
+        return appCache.get(this.name);
+      }
+
+      // create app
       const app = await createApp({
         name: this.name,
         url: this.url,
@@ -106,7 +108,11 @@ export default class RMApp extends BaseElement {
   }
 }
 
-export function defineApp() {
+export async function defineApp() {
+  const commCenterForBase = new CommCenterForBase(eventCenter);
+  getRawPrototypeMethods();
+  await setCommCenter(commCenterForBase);
+  overrideSetAttribute();
   register('rm-app', RMApp);
 }
 
