@@ -13,20 +13,22 @@ export const routes: Array<RouteRecordRaw> = [
   //     icon: 'yingyongguanli',
   //   },
   // },
-  {
-    path: '/react',
-    name: 'react应用',
-    component: ReactView,
-    meta: {
-      icon: 'yingyongguanli',
-    },
-  },
+
   {
     path: '/vue3',
     name: 'vue3应用',
     component: Vue3View,
     meta: {
       icon: 'xiaoxi',
+    },
+  },
+
+  {
+    path: '/react',
+    name: 'react应用',
+    component: ReactView,
+    meta: {
+      icon: 'yingyongguanli',
     },
   },
 

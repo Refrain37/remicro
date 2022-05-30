@@ -30,7 +30,10 @@ export default defineComponent({
     let info = reactive({});
     const sendMessage = () => {
       const win: any = window;
-      win.CommCenterForBase.setData('child-vue3', { msg: 'from base' });
+      win.CommCenterForBase.setData('child-vue3', {
+        msg: 'from base',
+        num: 123,
+      });
     };
 
     return {
@@ -38,6 +41,7 @@ export default defineComponent({
       sendMessage,
       handleDataChanged(e: any) {
         console.log('[main]子应用vue3传输的数据', e.detail);
+        window.alert(`[main]子应用vue3传输的数据：${e.detail.msg}`);
       },
       changeColor() {
         const root = document.documentElement;
@@ -46,11 +50,11 @@ export default defineComponent({
     };
   },
   mounted() {
-    const win: any = window;
-    setTimeout(() => {
-      win.CommCenterForBase.setData('child-vue3', { msg: 'from base' });
-      this.info = { name: 'refrain', age: 18 };
-    }, 2000);
+    // const win: any = window;
+    // setTimeout(() => {
+    //   win.CommCenterForBase.setData('child-vue3', { msg: 'from base' });
+    //   this.info = { name: 'refrain', age: 18 };
+    // }, 2000);
   },
 });
 </script>

@@ -13,6 +13,7 @@ import * as echarts from 'echarts';
 
 export default defineComponent({
   setup() {
+    console.log(window);
     provide('echarts', echarts); // 将echarts注入到全局
   },
 });
